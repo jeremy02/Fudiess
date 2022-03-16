@@ -83,3 +83,16 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# Ignore vs-code server files
+.vscode-server
+
+# Git config files
+.gitconfig
+
+# ssh files
+.ssh
+.ssh/*
+
+.bash_history
+.bash_history/*
