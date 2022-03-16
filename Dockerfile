@@ -1,7 +1,9 @@
 FROM ubuntu:18.04
    
 # Prerequisites
-RUN apt update && apt install -y curl git unzip xz-utils zip libglu1-mesa openjdk-8-jdk wget
+RUN apt-get update 
+RUN apt-get install -y curl git unzip xz-utils wget zip gdb libglu1-mesa openjdk-8-jdk libgconf-2-4 libstdc++6 fonts-droid-fallback lib32stdc++6 python3  
+RUN apt-get clean
    
 # Set up new user
 RUN useradd -ms /bin/bash developer
@@ -23,7 +25,26 @@ ENV PATH "$PATH:/home/developer/Android/sdk/platform-tools"
 
 # Download Flutter SDK
 RUN git clone https://github.com/flutter/flutter.git
-ENV PATH "$PATH:/home/developer/flutter/bin"
+ENV PATH "$PATH:/home/developer/flutter/bin:/home/developer/flutter/bin/cache/dart-sdk/bin"
    
 # Run basic check to download Dark SDK
 RUN flutter doctor
+
+# Enable flutter web
+RUN flutter channel master
+RUN flutter upgrade
+RUN flutter config --enable-web
+
+# Copy files to container and build
+RUN mkdir /app/
+COPY . /app/
+WORKDIR /app/
+RUN flutter build web
+
+# Record the exposed port
+EXPOSE 5000
+
+# make server startup script executable and start the web server
+RUN ["chmod", "+x", "/app/server/server.sh"]
+
+ENTRYPOINT [ "/app/server/server.sh"]
