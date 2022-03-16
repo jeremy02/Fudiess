@@ -33,6 +33,10 @@
 .pub/
 /build/
 *./build/
+/.packages
+./build/*
+./.packages
+./.packages/*
 
 # All in .dart_tool
 !.dart_tool/
