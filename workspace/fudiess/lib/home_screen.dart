@@ -1,36 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:fudiess/controllers/MenuController.dart';
+import 'package:fudiess/sections/custom_app_bar.dart';
+import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final MenuController _controller = Get.put(MenuController());
+
     return Scaffold(
-      // key: _controller.scaffoldkey,
-      // SingleChildScrollView
+      backgroundColor: kBackgroundColor,
+      key: _controller.scaffoldkey,
       body: SafeArea(
         child: SafeArea(
           child: Responsive(
-            mobile: Container(
-              width: MediaQuery.of(context).size.width,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.yellow,
+            mobile: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomAppBar(),
+                ],
               ),
             ),
-            tablet: Container(
-              width: MediaQuery.of(context).size.width,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.red,
+            tablet: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomAppBar(),
+                ],
               ),
             ),
-            desktop: Container(
-              width: MediaQuery.of(context).size.width,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.blue,
+            desktop: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomAppBar(),
+                ],
               ),
             ),
           ),
