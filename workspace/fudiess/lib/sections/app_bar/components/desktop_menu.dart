@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fudiess/controllers/MenuController.dart';
+import 'package:fudiess/controllers/menu_controller.dart';
 import 'package:fudiess/sections/app_bar/components/desktop_menu_item.dart';
 import 'package:get/get.dart';
 

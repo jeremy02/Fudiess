@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/state_manager.dart';
 
 class MenuController extends GetxController {
@@ -11,13 +12,13 @@ class MenuController extends GetxController {
 
   GlobalKey<ScaffoldState> get scaffoldkey => _scaffoldKey;
 
-  // void openOrCloseDrawer() {
-  //   if (_scaffoldKey.currentState.isDrawerOpen) {
-  //     _scaffoldKey.currentState.openEndDrawer();
-  //   } else {
-  //     _scaffoldKey.currentState.openDrawer();
-  //   }
-  // }
+  void openOrCloseDrawer() {
+    if (_scaffoldKey.currentState!.isDrawerOpen) {
+      _scaffoldKey.currentState?.openEndDrawer();
+    } else {
+      _scaffoldKey.currentState?.openEndDrawer();
+    }
+  }
 
   void setMenuIndex(int index) {
     _selectedIndex.value = index;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fudiess/controllers/MenuController.dart';
+import 'package:fudiess/controllers/menu_controller.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 import 'package:get/get.dart';
@@ -11,8 +11,6 @@ import 'components/desktop_menu.dart';
 
 class CustomAppBar extends StatelessWidget {
   CustomAppBar({Key? key}) : super(key: key);
-
-  final MenuController _controller = Get.put(MenuController());
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +60,8 @@ class CustomAppBar extends StatelessWidget {
 }
 
 Widget DrawerIconButton(BuildContext context) {
+  final MenuController _controller = Get.put(MenuController());
+
   return Stack(
     children: <Widget>[
       Positioned.fill(
@@ -80,7 +80,9 @@ Widget DrawerIconButton(BuildContext context) {
                 0.2,
               ),
               hoverColor: Colors.transparent,
-              onTap: () {},
+              onTap: () {
+                _controller.openOrCloseDrawer();
+              },
             ),
           ),
         ),
@@ -89,19 +91,24 @@ Widget DrawerIconButton(BuildContext context) {
         borderRadius: BorderRadius.circular(
           10.0,
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-            12.0,
-            12.0,
-            8.0,
-            12.0,
-          ),
-          child: SvgPicture.asset(
-            "assets/icons/ic_menu.svg",
-            height: 20.0,
-            color: kPrimaryColor,
-            alignment: Alignment.centerLeft,
-            fit: BoxFit.cover,
+        child: GestureDetector(
+          onTap: () {
+            _controller.openOrCloseDrawer();
+          },
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(
+              12.0,
+              12.0,
+              8.0,
+              12.0,
+            ),
+            child: SvgPicture.asset(
+              "assets/icons/ic_menu.svg",
+              height: 20.0,
+              color: kPrimaryColor,
+              alignment: Alignment.centerLeft,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
