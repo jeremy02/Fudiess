@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fudiess/utils/constants.dart';
+
+import '../utils/constants.dart';
 
 class DefaultButton extends StatelessWidget {
   final String buttonText;
@@ -13,21 +14,34 @@ class DefaultButton extends StatelessWidget {
     required this.buttonText,
     required this.horizontalPadding,
     required this.fontSize,
-    required this.fontWeight,
     required this.buttonPress,
+    required this.fontWeight,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding,
-          vertical: kDefaultPadding,
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(
+          Colors.white,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            kDefaultPadding * 0.80,
+        backgroundColor: MaterialStateProperty.all<Color>(
+          kPrimaryColor,
+        ),
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+          EdgeInsets.symmetric(
+            horizontal: horizontalPadding,
+            vertical: kDefaultPadding,
+          ),
+        ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              kDefaultPadding * 0.60,
+            ),
+            side: const BorderSide(
+              color: Colors.transparent,
+            ),
           ),
         ),
       ),
@@ -38,11 +52,11 @@ class DefaultButton extends StatelessWidget {
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: fontSize,
-          fontWeight: FontWeight.bold,
+          fontWeight: fontWeight,
           color: Colors.white,
         ),
       ),
-      onPressed: () {},
+      onPressed: buttonPress,
     );
   }
 }

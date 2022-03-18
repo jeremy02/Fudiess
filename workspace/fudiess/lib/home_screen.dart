@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/controllers/MenuController.dart';
-import 'package:fudiess/sections/custom_app_bar.dart';
+import 'package:fudiess/sections/app_bar/custom_app_bar.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 import 'package:get/get.dart';

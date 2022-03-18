@@ -27,9 +27,6 @@ class FudiessApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: kBgColor,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: TextButton.styleFrom(backgroundColor: kPrimaryColor),
-        ),
         textTheme: const TextTheme(
           bodyText1: TextStyle(color: kBodyTextColor),
           bodyText2: TextStyle(color: kBodyTextColor),
