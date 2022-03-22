@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       key: _controller.scaffoldkey,
-      endDrawer: DrawerMenu(),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: SafeArea(
           child: Responsive(

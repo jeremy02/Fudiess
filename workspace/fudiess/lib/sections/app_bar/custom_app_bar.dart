@@ -10,7 +10,7 @@ import '../../components/default_button.dart';
 import 'components/desktop_menu.dart';
 
 class CustomAppBar extends StatelessWidget {
-  CustomAppBar({Key? key}) : super(key: key);
+  const CustomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
