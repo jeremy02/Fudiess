@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/sections/app_bar/custom_app_bar.dart';
+import 'package:fudiess/sections/app_top_section/components/food_company_item.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
+import 'package:get/get.dart';
+
+import 'models/food_company.dart';
 
 class AppTopSection extends StatelessWidget {
   @override
@@ -48,28 +52,56 @@ class AppTopSection extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 20,
-            right: 20,
-            child: Card(
-              elevation: 2.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  8.0,
-                ),
-              ),
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  "Your Text here \n With new text Your Text here \n With new text",
-                ),
-              ),
-            ),
-          ),
+          _foodCompaniesWidget(context, calculatedHeight)
         ],
       ),
+    );
+  }
+
+
+
+  Widget _foodCompaniesWidget(BuildContext context, double calculatedHeight) {
+
+    final FoodCompanyController _controller =
+      Get.put(FoodCompanyController());
+
+    return Positioned(
+        bottom: 0,
+        left: Responsive.isMobile(context) ? 16 : 32,
+        right: Responsive.isMobile(context) ? 16 : 32,
+        child: Card(
+            elevation: 2.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                8.0,
+              ),
+            ),
+            color: Colors.white,
+            child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: Responsive.isMobile(context) ? kDefaultPadding / 2 : kDefaultPadding,
+                  horizontal: Responsive.isMobile(context) ? 0 : kDefaultPadding,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(
+                    _controller.foodCompanies.length,
+                        (index) => FoodCompanyItem(
+                      title: _controller.foodCompanies[index].title,
+                      imagePath: _controller.foodCompanies[index].imagePath,
+                      width: Responsive.isMobile(context) ? calculatedHeight * 0.08 : calculatedHeight * 0.16,
+                      height: Responsive.isMobile(context) ? calculatedHeight * 0.08 : calculatedHeight * 0.16,
+                      press: () => (index) {
+                        // print(index);
+                      },
+                      key: ObjectKey(_controller.foodCompanies[index]),
+                    ),
+                  ),
+                ),
+            ),
+        ),
     );
   }
 }
