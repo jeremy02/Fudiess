@@ -23,7 +23,7 @@ class FoodCompanyItem extends StatelessWidget {
     Duration duration = const Duration(milliseconds: 200);
 
     return InkWell(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(kDefaultPadding/2),
         onTap: press,
         child: Padding(
           padding: const EdgeInsets.all(kDefaultPadding * 0.8),

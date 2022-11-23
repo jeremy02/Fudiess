@@ -5,6 +5,7 @@ import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 import 'package:get/get.dart';
 
+import 'components/top_section_main.dart';
 import 'models/food_company.dart';
 
 class AppTopSection extends StatelessWidget {
@@ -12,30 +13,34 @@ class AppTopSection extends StatelessWidget {
   Widget build(BuildContext context) {
     Size sizes = MediaQuery.of(context).size;
 
-    double calculatedHeight = sizes.width;
+    double calculatedWidth = sizes.width;
+    double calculatedHeight = sizes.height * 0.90;
 
     // if isDesktop
     if (Responsive.isDesktop(context)) {
-      calculatedHeight = calculatedHeight * 0.45;
+      calculatedWidth = calculatedWidth * 0.45;
     }
 
     // if isTablet
     if (Responsive.isTablet(context)) {
-      calculatedHeight = calculatedHeight * 0.60;
+      calculatedWidth = calculatedWidth * 0.45;
     }
 
     // if mobile
     if (Responsive.isMobile(context)) {
-      calculatedHeight = calculatedHeight * 1.5;
+      calculatedWidth = calculatedWidth * 1.5;
     }
 
     return SafeArea(
       child: Stack(
         children: [
           AnimatedContainer(
+            constraints: BoxConstraints(
+              minHeight: Responsive.isDesktop(context) ? 600 : 450,
+            ),
             height: calculatedHeight,
             margin: const EdgeInsets.only(
-              bottom: kDefaultPadding * 2,
+              bottom: kDefaultPadding * 3.5,
             ),
             decoration: const BoxDecoration(
               color: kBackgroundColor,
@@ -47,12 +52,25 @@ class AppTopSection extends StatelessWidget {
             curve: Curves.fastOutSlowIn,
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                CustomAppBar(),
+                const CustomAppBar(),
+                SizedBox(
+                  height: Responsive.isDesktop(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 2,
+                ),
+                TopSectionMain(
+                  key: UniqueKey(),
+                  width: calculatedWidth,
+                  height: calculatedHeight,
+                ),
+                SizedBox(
+                  height: Responsive.isDesktop(context) ? kDefaultPadding * 5 : kDefaultPadding * 2,
+                ),
               ],
             ),
           ),
-          _foodCompaniesWidget(context, calculatedHeight)
+          _foodCompaniesWidget(context, calculatedWidth)
         ],
       ),
     );
@@ -60,7 +78,7 @@ class AppTopSection extends StatelessWidget {
 
 
 
-  Widget _foodCompaniesWidget(BuildContext context, double calculatedHeight) {
+  Widget _foodCompaniesWidget(BuildContext context, double calculatedWidth) {
 
     final FoodCompanyController _controller =
       Get.put(FoodCompanyController());
@@ -91,8 +109,8 @@ class AppTopSection extends StatelessWidget {
                         (index) => FoodCompanyItem(
                       title: _controller.foodCompanies[index].title,
                       imagePath: _controller.foodCompanies[index].imagePath,
-                      width: Responsive.isMobile(context) ? calculatedHeight * 0.08 : calculatedHeight * 0.16,
-                      height: Responsive.isMobile(context) ? calculatedHeight * 0.08 : calculatedHeight * 0.16,
+                      width: Responsive.isMobile(context) ? calculatedWidth * 0.08 : calculatedWidth * 0.12,
+                      height: Responsive.isMobile(context) ? calculatedWidth * 0.10 : calculatedWidth * 0.12,
                       press: () => (index) {
                         // print(index);
                       },
