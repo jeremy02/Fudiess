@@ -85,8 +85,8 @@ class AppTopSection extends StatelessWidget {
 
     return Positioned(
         bottom: 0,
-        left: Responsive.isMobile(context) ? 16 : 32,
-        right: Responsive.isMobile(context) ? 16 : 32,
+      left: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
+      right: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
         child: Card(
             elevation: 2.0,
             shape: RoundedRectangleBorder(
