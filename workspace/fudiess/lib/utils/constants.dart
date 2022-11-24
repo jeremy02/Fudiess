@@ -18,6 +18,7 @@ const kTextSecondaryColor = Color.fromRGBO(119, 119, 119, 0.6);
 
 const kDefaultPadding = 20.0;
 const kMaxWidth = 1232.0;
+const kMaxWidthXL = 1386.0;
 const kDefaultDuration = Duration(milliseconds: 250);
 
 final kDefaultCardShadow = BoxShadow(

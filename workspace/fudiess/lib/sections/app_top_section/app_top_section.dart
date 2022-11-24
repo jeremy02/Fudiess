@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/sections/app_bar/custom_app_bar.dart';
-import 'package:fudiess/sections/app_top_section/components/food_company_item.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
-import 'package:get/get.dart';
 
-import 'components/top_section_main.dart';
-import 'models/food_company.dart';
+import 'components/food_companies_component.dart';
+import 'components/top_section_main_component.dart';
 
 class AppTopSection extends StatelessWidget {
   const AppTopSection({
@@ -20,7 +18,7 @@ class AppTopSection extends StatelessWidget {
   Widget build(BuildContext context) {
 
     double calculatedWidth = screenSize.width;
-    double calculatedHeight = screenSize.height * 0.90;
+    double calculatedHeight = screenSize.height;
 
     // if isDesktop
     if (Responsive.isDesktop(context)) {
@@ -43,6 +41,7 @@ class AppTopSection extends StatelessWidget {
           AnimatedContainer(
             constraints: BoxConstraints(
               minHeight: Responsive.isMobile(context) ? 450 : 600,
+              maxWidth: kMaxWidth,
             ),
             height: calculatedHeight,
             margin: const EdgeInsets.only(
@@ -65,7 +64,7 @@ class AppTopSection extends StatelessWidget {
                 SizedBox(
                   height: Responsive.isDesktop(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 2,
                 ),
-                TopSectionMain(
+                TopSectionMainComponent(
                   key: UniqueKey(),
                   width: calculatedWidth,
                   height: calculatedHeight,
@@ -76,56 +75,12 @@ class AppTopSection extends StatelessWidget {
               ],
             ),
           ),
-          _foodCompaniesWidget(context, calculatedWidth)
+          FoodCompaniesComponent(
+            key: UniqueKey(),
+            calculatedWidth: calculatedWidth,
+          )
         ],
       ),
-    );
-  }
-
-
-
-  Widget _foodCompaniesWidget(BuildContext context, double calculatedWidth) {
-
-    final FoodCompanyController _controller =
-      Get.put(FoodCompanyController());
-
-    return Positioned(
-        bottom: 0,
-        left: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
-        right: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
-        child: Card(
-            elevation: 2.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                8.0,
-              ),
-            ),
-            color: Colors.white,
-            child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: Responsive.isMobile(context) ? kDefaultPadding / 2 : kDefaultPadding,
-                  horizontal: Responsive.isMobile(context) ? 0 : kDefaultPadding,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(
-                    _controller.foodCompanies.length,
-                        (index) => FoodCompanyItem(
-                      title: _controller.foodCompanies[index].title,
-                      imagePath: _controller.foodCompanies[index].imagePath,
-                      width: Responsive.isMobile(context) ? calculatedWidth * 0.08 : calculatedWidth * 0.12,
-                      height: Responsive.isMobile(context) ? calculatedWidth * 0.10 : calculatedWidth * 0.12,
-                      press: () => (index) {
-                        // print(index);
-                      },
-                      key: ObjectKey(_controller.foodCompanies[index]),
-                    ),
-                  ),
-                ),
-            ),
-        ),
     );
   }
 }

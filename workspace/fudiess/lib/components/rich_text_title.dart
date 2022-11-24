@@ -26,13 +26,14 @@ class RichTextTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       textAlign: alignStart==true ? TextAlign.start : TextAlign.center,
-      textScaleFactor: textScaleFactor ?? 0.0,
+      // textScaleFactor: textScaleFactor ?? 0.0,
       text: TextSpan(
         text: text,
         style: TextStyle(
             fontSize: fontSize,
             color: textColor,
-            fontWeight: fontWeight
+            fontWeight: fontWeight,
+            height: textScaleFactor ?? 0.0
         ),
         children: coloredText != null ? <TextSpan>[
           TextSpan(

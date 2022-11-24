@@ -5,8 +5,8 @@ import 'package:fudiess/sections/app_top_section/components/top_section_discount
 import '../../../utils/constants.dart';
 import '../../../utils/responsive.dart';
 
-class TopSectionMain extends StatelessWidget {
-  const TopSectionMain({
+class TopSectionMainComponent extends StatelessWidget {
+  const TopSectionMainComponent({
     required Key key,
     required this.width,
     required this.height,
@@ -69,10 +69,10 @@ class TopSectionMain extends StatelessWidget {
   // this displays the top containers text layout
   Widget _topContainerTextLayout(BuildContext context, int weight) {
     String captionText =
-        "Open repair of infrarenal aortic \n anuerysm or dissection, plus repair.";
+        "Open repair of infrarenal aortic \nanuerysm or dissection, plus repair.";
 
     if (Responsive.isMobile(context)) {
-        captionText = "Open repair of infrarenal \n aortic anuerysm or \n dissection.";
+        captionText = "Open repair of infrarenal \naortic anuerysm or \n dissection.";
     }
 
     return Expanded(
@@ -94,22 +94,14 @@ class TopSectionMain extends StatelessWidget {
                       height: kDefaultPadding,
                   ),
                 RichTextTitle(
-                    text: "Fastest &",
+                    text: "Fastest & \nCheapest ",
                     fontSize: Responsive.isMobile(context) ? 30 : 40,
                     fontWeight: FontWeight.bold,
                     textColor: Colors.black,
                     alignStart: Responsive.isMobile(context) ? false : true,
-                    textScaleFactor: 1.2,
-                ),
-                RichTextTitle(
-                  text: "Cheapest ",
-                  fontSize: Responsive.isMobile(context) ? 30 : 40,
-                  fontWeight: FontWeight.bold,
-                  textColor: Colors.black,
-                  alignStart: Responsive.isMobile(context) ? false : true,
-                  coloredText: "Food",
-                  coloredTextColor: kPrimaryColor,
-                  textScaleFactor: 1.2,
+                    coloredText: "Food",
+                    coloredTextColor: kPrimaryColor,
+                    textScaleFactor: 1.5,
                 ),
                 RichTextTitle(
                   text: "is in Your Hand",
@@ -117,7 +109,7 @@ class TopSectionMain extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   textColor: Colors.black,
                   alignStart: Responsive.isMobile(context) ? false : true,
-                  textScaleFactor: 1.2,
+                  textScaleFactor: 1.5,
                 ),
                 SizedBox(
                   height: Responsive.isMobile(context) ? kDefaultPadding / 1.5 : kDefaultPadding,
@@ -125,10 +117,10 @@ class TopSectionMain extends StatelessWidget {
                 RichTextTitle(
                   text: captionText,
                   fontSize: 16,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.bold,
                   textColor: kTextSecondaryColor,
                   alignStart: Responsive.isMobile(context) ? false : true,
-                  textScaleFactor: 1.0,
+                  textScaleFactor: 1.2,
                 ),
                 SizedBox(
                   height: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : 0,

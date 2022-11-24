@@ -23,41 +23,42 @@ class HomeScreen extends StatelessWidget {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: SafeArea(
-          child: Responsive(
-            mobile: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  AppTopSection(screenSize: screenSize),
-                  const SizedBox(
-                    height: kDefaultPadding,
-                  ),
-                  AppOrderSection(screenSize: screenSize),
-                ],
+          child: Center(
+            child: Responsive(
+              mobile: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    AppTopSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: kDefaultPadding,
+                    ),
+                    AppOrderSection(screenSize: screenSize),
+                  ],
+                ),
               ),
-            ),
-            tablet: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  AppTopSection(screenSize: screenSize),
-                  const SizedBox(
-                    height: kDefaultPadding,
-                  ),
-                  AppOrderSection(screenSize: screenSize),
-                ],
+              tablet: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    AppTopSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: kDefaultPadding,
+                    ),
+                    AppOrderSection(screenSize: screenSize),
+                  ],
+                ),
               ),
-            ),
-            desktop: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  AppTopSection(screenSize: screenSize),
-                  const SizedBox(
-                    height: kDefaultPadding,
-                  ),
-                  AppOrderSection(screenSize: screenSize),
-                ],
+              desktop: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    AppTopSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: kDefaultPadding,
+                    ),
+                    AppOrderSection(screenSize: screenSize),
+                  ],
+                ),
               ),
             ),
           ),
