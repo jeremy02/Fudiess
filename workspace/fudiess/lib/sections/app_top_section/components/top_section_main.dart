@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/components/rich_text_title.dart';
 import 'package:fudiess/sections/app_top_section/components/top_section_discount_text_button.dart';
+
 import '../../../utils/constants.dart';
 import '../../../utils/responsive.dart';
 
@@ -30,8 +31,8 @@ class TopSectionMain extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  _topContainerImageLayout(context, 1),
-                  _topContainerTextLayout(context, 1),
+                  _topContainerImageLayout(context, 2),
+                  _topContainerTextLayout(context, 3),
                 ],
               ),
         ),
@@ -42,7 +43,14 @@ class TopSectionMain extends StatelessWidget {
   Widget _topContainerImageLayout(BuildContext context, int weight) {
     return Expanded(
           flex: weight,
-          child: Align(
+          child: 1 == 1 ?
+          Image.asset(
+            'assets/images/ic_top_section_main_1x.png',
+            height: height * 0.7,
+            scale: 0.9,
+          )
+              :
+          Align(
               alignment: Alignment.centerLeft,
               child: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
@@ -60,13 +68,20 @@ class TopSectionMain extends StatelessWidget {
 
   // this displays the top containers text layout
   Widget _topContainerTextLayout(BuildContext context, int weight) {
+    String captionText =
+        "Open repair of infrarenal aortic \n anuerysm or dissection, plus repair.";
+
+    if (Responsive.isMobile(context)) {
+        captionText = "Open repair of infrarenal \n aortic anuerysm or \n dissection.";
+    }
+
     return Expanded(
         flex: weight,
         child: Container(
             alignment: Responsive.isMobile(context) ? Alignment.center :  Alignment.centerLeft,
             margin: EdgeInsets.only(
-              left: Responsive.isMobile(context) ? kDefaultPadding*0.8 : 0,
-              right: Responsive.isMobile(context) ? kDefaultPadding*0.8 : kDefaultPadding * 2,
+              left: Responsive.isMobile(context) ? kDefaultPadding : 0,
+              right: Responsive.isMobile(context) ? kDefaultPadding : kDefaultPadding * 2,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -80,27 +95,46 @@ class TopSectionMain extends StatelessWidget {
                   ),
                 RichTextTitle(
                     text: "Fastest &",
-                    fontSize: Responsive.isMobile(context) ? 32 : 48,
+                    fontSize: Responsive.isMobile(context) ? 30 : 40,
                     fontWeight: FontWeight.bold,
                     textColor: Colors.black,
                     alignStart: Responsive.isMobile(context) ? false : true,
+                    textScaleFactor: 1.2,
                 ),
                 RichTextTitle(
                   text: "Cheapest ",
-                  fontSize: Responsive.isMobile(context) ? 32 : 48,
+                  fontSize: Responsive.isMobile(context) ? 30 : 40,
                   fontWeight: FontWeight.bold,
                   textColor: Colors.black,
                   alignStart: Responsive.isMobile(context) ? false : true,
                   coloredText: "Food",
                   coloredTextColor: kPrimaryColor,
+                  textScaleFactor: 1.2,
                 ),
                 RichTextTitle(
                   text: "is in Your Hand",
-                  fontSize: Responsive.isMobile(context) ? 32 : 48,
+                  fontSize: Responsive.isMobile(context) ? 30 : 40,
                   fontWeight: FontWeight.bold,
                   textColor: Colors.black,
                   alignStart: Responsive.isMobile(context) ? false : true,
+                  textScaleFactor: 1.2,
                 ),
+                SizedBox(
+                  height: Responsive.isMobile(context) ? kDefaultPadding / 1.5 : kDefaultPadding,
+                ),
+                RichTextTitle(
+                  text: captionText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  textColor: kTextSecondaryColor,
+                  alignStart: Responsive.isMobile(context) ? false : true,
+                  textScaleFactor: 1.0,
+                ),
+                SizedBox(
+                  height: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : 0,
+                ),
+                if (Responsive.isMobile(context))
+                  TopSectionDiscountTextButton(),
               ],
             ),
         ),

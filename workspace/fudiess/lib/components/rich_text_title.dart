@@ -8,6 +8,7 @@ class RichTextTitle extends StatelessWidget {
   final bool? alignStart;
   final String? coloredText;
   final Color? coloredTextColor;
+  final double? textScaleFactor;
 
   const RichTextTitle({
     Key? key,
@@ -18,13 +19,14 @@ class RichTextTitle extends StatelessWidget {
     this.alignStart = false,
     this.coloredText,
     this.coloredTextColor,
+    this.textScaleFactor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RichText(
       textAlign: alignStart==true ? TextAlign.start : TextAlign.center,
-      textScaleFactor: 1.5,
+      textScaleFactor: textScaleFactor ?? 0.0,
       text: TextSpan(
         text: text,
         style: TextStyle(

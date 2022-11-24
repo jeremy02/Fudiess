@@ -9,12 +9,18 @@ import 'components/top_section_main.dart';
 import 'models/food_company.dart';
 
 class AppTopSection extends StatelessWidget {
+  const AppTopSection({
+    Key? key,
+    required this.screenSize,
+  }) : super(key: key);
+
+  final Size screenSize;
+
   @override
   Widget build(BuildContext context) {
-    Size sizes = MediaQuery.of(context).size;
 
-    double calculatedWidth = sizes.width;
-    double calculatedHeight = sizes.height * 0.90;
+    double calculatedWidth = screenSize.width;
+    double calculatedHeight = screenSize.height * 0.90;
 
     // if isDesktop
     if (Responsive.isDesktop(context)) {
@@ -85,8 +91,8 @@ class AppTopSection extends StatelessWidget {
 
     return Positioned(
         bottom: 0,
-      left: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
-      right: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
+        left: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
+        right: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : kDefaultPadding * 2,
         child: Card(
             elevation: 2.0,
             shape: RoundedRectangleBorder(
