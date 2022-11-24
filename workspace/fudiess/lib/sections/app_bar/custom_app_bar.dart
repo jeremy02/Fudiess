@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget {
             ),
           DefaultButton(
             buttonText: "Sign Up",
-            fontSize: Responsive.isDesktop(context) ? 14.0 : 12.0,
+            fontSize: Responsive.isMobile(context) ? 12.0 : 14.0,
             horizontalPadding: Responsive.isDesktop(context)
                 ? kDefaultPadding * 1.5
                 : kDefaultPadding,

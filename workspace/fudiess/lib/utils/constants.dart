@@ -14,6 +14,7 @@ const kBodyTextColor = Color(0xFF666666);
 
 const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF555555);
+const kTextSecondaryColor = Color.fromRGBO(119, 119, 119, 1.0);
 
 const kDefaultPadding = 20.0;
 const kMaxWidth = 1232.0;

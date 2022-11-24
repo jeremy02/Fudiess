@@ -36,7 +36,7 @@ class AppTopSection extends StatelessWidget {
         children: [
           AnimatedContainer(
             constraints: BoxConstraints(
-              minHeight: Responsive.isDesktop(context) ? 600 : 450,
+              minHeight: Responsive.isMobile(context) ? 450 : 600,
             ),
             height: calculatedHeight,
             margin: const EdgeInsets.only(
