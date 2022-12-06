@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
 import '../../utils/responsive.dart';
 import 'components/footer_section_about_fudiess_layout.dart';
+import 'components/footer_section_pages_services_layout.dart';
+import 'models/footer_sections.dart';
+import 'package:get/get.dart';
 
 class AppFooterSection extends StatelessWidget {
-  const AppFooterSection({
+  AppFooterSection({
     Key? key,
     required this.screenSize,
   }) : super(key: key);
@@ -51,56 +54,118 @@ class AppFooterSection extends StatelessWidget {
   }
 
   Widget _buildFooterMobileLayout(BuildContext context) {
+
+    final FooterSectionsController _controller = Get.put(FooterSectionsController());
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
+          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
           children: [
             const Flexible(
-              flex: 1,
+              flex: 2,
               child: FooterSectionAboutFoodiesLayout(),
             ),
             const SizedBox(
               width: kDefaultPadding,
             ),
             Flexible(
-              flex: 2,
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                color: Colors.yellow,
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: kDefaultPadding / 2.5,
+                  ),
+                  FooterSectionPagesServiceLayout(
+                    title: _controller.footerPagesTitle,
+                    pageServicesList: _controller.footerPages,
+                    addSpacing: true,
+                  ),
+                  const SizedBox(
+                    height: kDefaultPadding,
+                  ),
+                  FooterSectionPagesServiceLayout(
+                    title: _controller.footerServicesTitle,
+                    pageServicesList: _controller.footerServices,
+                    addSpacing: true,
+                  ),
+                ],
               ),
             ),
           ],
-        )
+        ),
+        const SizedBox(
+          height: kDefaultPadding,
+        ),
+        FooterSectionPagesServiceLayout(
+          title: _controller.footerCompaniesTitle,
+          pageServicesList: _controller.footerCompanies,
+          addSpacing: false,
+        ),
       ],
     );
   }
 
   Widget _buildFooterLayout(BuildContext context) {
+
+    final FooterSectionsController _controller = Get.put(FooterSectionsController());
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
       children: [
         const Flexible(
-          flex: 1,
+          flex: 2,
           child: FooterSectionAboutFoodiesLayout(),
         ),
-        const SizedBox(
-          width: kDefaultPadding * 2,
+        SizedBox(
+          width: Responsive.isTablet(context) ? kDefaultPadding * 2 : kDefaultPadding * 4,
         ),
         Flexible(
-          flex: 2,
-          child: Container(
-            width: double.infinity,
-            height: 200,
-            color: Colors.yellow,
-          ),
+            flex: 3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Flexible(
+                      child: FooterSectionPagesServiceLayout(
+                        title: _controller.footerPagesTitle,
+                        pageServicesList: _controller.footerPages,
+                        addSpacing: true,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: kDefaultPadding * 2,
+                    ),
+                    Flexible(
+                      child: FooterSectionPagesServiceLayout(
+                        title: _controller.footerServicesTitle,
+                        pageServicesList: _controller.footerServices,
+                        addSpacing: true,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: kDefaultPadding * 2,
+                ),
+                FooterSectionPagesServiceLayout(
+                  title: _controller.footerCompaniesTitle,
+                  pageServicesList: _controller.footerCompanies,
+                  addSpacing: false,
+                ),
+              ],
+            ),
         ),
       ],
     );

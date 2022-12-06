@@ -30,8 +30,8 @@ class FooterSectionAboutFoodiesLayout extends StatelessWidget {
           alignment: Alignment.centerLeft,
           fit: BoxFit.cover,
         ),
-        const SizedBox(
-          height: kDefaultPadding / 2,
+        SizedBox(
+          height: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding,
         ),
         RichTextTitle(
           text: captionText,
@@ -41,8 +41,8 @@ class FooterSectionAboutFoodiesLayout extends StatelessWidget {
           alignStart: true,
           textScaleFactor: 1.2,
         ),
-        const SizedBox(
-          height: kDefaultPadding / 2,
+        SizedBox(
+          height: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding,
         ),
         Container(
           height: 2.0,
@@ -50,10 +50,12 @@ class FooterSectionAboutFoodiesLayout extends StatelessWidget {
             color: kPrimaryColor,
           ),
         ),
-        const SizedBox(
-          height: kDefaultPadding / 2,
+        SizedBox(
+          height: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding,
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _buildSocialMediaButtons(context, 'assets/images/ic_facebook.png'),
             SizedBox(
