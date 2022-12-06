@@ -29,6 +29,7 @@ class HomeScreen extends StatelessWidget {
               mobile: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppTopSection(screenSize: screenSize),
                     const SizedBox(
@@ -42,6 +43,7 @@ class HomeScreen extends StatelessWidget {
               tablet: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppTopSection(screenSize: screenSize),
                     const SizedBox(
@@ -54,6 +56,8 @@ class HomeScreen extends StatelessWidget {
               ),
               desktop: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppTopSection(screenSize: screenSize),
                     const SizedBox(
