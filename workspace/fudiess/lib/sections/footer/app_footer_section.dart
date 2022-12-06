@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../utils/constants.dart';
 import '../../utils/responsive.dart';
 import 'components/footer_section_about_fudiess_layout.dart';
 import 'components/footer_section_pages_services_layout.dart';
 import 'models/footer_sections.dart';
-import 'package:get/get.dart';
 
 class AppFooterSection extends StatelessWidget {
   AppFooterSection({
