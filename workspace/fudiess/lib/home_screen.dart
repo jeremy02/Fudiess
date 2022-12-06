@@ -3,6 +3,7 @@ import 'package:fudiess/controllers/menu_controller.dart';
 import 'package:fudiess/sections/app_bar/components/drawer_menu.dart';
 import 'package:fudiess/sections/app_order_section/app_order_section.dart';
 import 'package:fudiess/sections/app_top_section/app_top_section.dart';
+import 'package:fudiess/sections/footer/app_footer_section.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding,
                     ),
                     AppOrderSection(screenSize: screenSize),
+                    AppFooterSection(screenSize: screenSize),
                   ],
                 ),
               ),
@@ -46,6 +48,7 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding,
                     ),
                     AppOrderSection(screenSize: screenSize),
+                    AppFooterSection(screenSize: screenSize),
                   ],
                 ),
               ),
@@ -57,6 +60,10 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding,
                     ),
                     AppOrderSection(screenSize: screenSize),
+                    AppFooterSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: kDefaultPadding * 3,
+                    ),
                   ],
                 ),
               ),
