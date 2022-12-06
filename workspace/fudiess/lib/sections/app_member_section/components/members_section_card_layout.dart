@@ -4,7 +4,6 @@ import 'package:fudiess/sections/app_member_section/components/subscribe_button.
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 
-import '../../../components/default_button.dart';
 import '../../../components/rich_text_title.dart';
 
 class MembersSectionCardLayout extends StatelessWidget {

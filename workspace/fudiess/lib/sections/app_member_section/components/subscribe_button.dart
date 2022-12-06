@@ -3,8 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 
-import '../../../components/default_button.dart';
-
 class SubscribeButton extends StatelessWidget {
   const SubscribeButton({
     Key? key,
