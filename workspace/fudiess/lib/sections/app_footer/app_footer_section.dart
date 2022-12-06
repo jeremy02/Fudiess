@@ -58,7 +58,7 @@ class AppFooterSection extends StatelessWidget {
     final FooterSectionsController _controller = Get.put(FooterSectionsController());
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
@@ -76,7 +76,7 @@ class AppFooterSection extends StatelessWidget {
             Flexible(
               flex: 3,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
@@ -131,7 +131,7 @@ class AppFooterSection extends StatelessWidget {
             flex: 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
