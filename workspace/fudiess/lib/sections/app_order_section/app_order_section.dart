@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
-import 'package:get/get.dart';
 
-import '../../components/rich_text_title.dart';
 import 'components/order_section_steps_layout.dart';
 import 'components/order_section_title_layout.dart';
-import 'components/order_step_item.dart';
-import 'models/order_steps.dart';
 
 class AppOrderSection extends StatelessWidget {
   const AppOrderSection({

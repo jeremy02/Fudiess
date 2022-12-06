@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../components/rich_text_title.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/responsive.dart';
 import '../models/order_steps.dart';
