@@ -21,8 +21,6 @@ class AppMemberSection extends StatelessWidget {
           maxWidth: kMaxWidth,
         ),
         padding: EdgeInsets.only(
-          top: Responsive.isMobile(context) ? kDefaultPadding : 0,
-          bottom: Responsive.isMobile(context) ? kDefaultPadding * 0.5  : 0,
           left: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 2,
           right: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 2,
         ),

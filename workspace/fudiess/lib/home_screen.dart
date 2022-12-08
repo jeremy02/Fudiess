@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/controllers/menu_controller.dart';
 import 'package:fudiess/sections/app_bar/components/drawer_menu.dart';
+import 'package:fudiess/sections/app_faqs/app_faqs_section.dart';
 import 'package:fudiess/sections/app_footer/app_footer_section.dart';
 import 'package:fudiess/sections/app_member_section/app_members_section.dart';
 import 'package:fudiess/sections/app_order_section/app_order_section.dart';
@@ -37,9 +38,13 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding,
                     ),
                     AppOrderSection(screenSize: screenSize),
+                    AppFAQsSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: kDefaultPadding * 2,
+                    ),
                     AppMemberSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding,
+                      height: kDefaultPadding * 2,
                     ),
                     AppFooterSection(screenSize: screenSize),
                   ],
@@ -55,7 +60,14 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding,
                     ),
                     AppOrderSection(screenSize: screenSize),
+                    AppFAQsSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: kDefaultPadding * 2,
+                    ),
                     AppMemberSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: 0,
+                    ),
                     AppFooterSection(screenSize: screenSize),
                   ],
                 ),
@@ -70,7 +82,14 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding,
                     ),
                     AppOrderSection(screenSize: screenSize),
+                    AppFAQsSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: kDefaultPadding * 2,
+                    ),
                     AppMemberSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: 0,
+                    ),
                     AppFooterSection(screenSize: screenSize),
                     const SizedBox(
                       height: kDefaultPadding * 3,
