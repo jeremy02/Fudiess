@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 
-import 'components/order_section_steps_layout.dart';
-import 'components/order_section_title_layout.dart';
-
-class AppOrderSection extends StatelessWidget {
-  const AppOrderSection({
+class AppMenuSection extends StatelessWidget {
+  const AppMenuSection({
     Key? key,
     required this.screenSize,
   }) : super(key: key);
@@ -16,16 +12,20 @@ class AppOrderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double calculatedWidth = screenSize.width;
+    double calculatedHeight = screenSize.height;
+
     return SafeArea(
-      child:
-      AnimatedContainer(
-        constraints: const BoxConstraints(
+      child: AnimatedContainer(
+        constraints: BoxConstraints(
+          minHeight: Responsive.isMobile(context) ? 450 : 600,
           maxWidth: kMaxWidth,
         ),
         padding: EdgeInsets.symmetric(
           vertical: kDefaultPadding * 0.5,
           horizontal: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 2,
         ),
+        height: calculatedHeight,
         decoration: const BoxDecoration(
           color: Colors.transparent,
         ),
@@ -33,16 +33,11 @@ class AppOrderSection extends StatelessWidget {
           milliseconds: 500,
         ),
         // Provide an optional curve to make the animation feel smoother.
-        curve: Curves.fastLinearToSlowEaseIn,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const OrderSectionTitleLayout(),
-            SizedBox(
-              height: Responsive.isMobile(context) ? kDefaultPadding : kDefaultPadding * 2,
-            ),
-            const OrderSectionStepsLayout(),
-          ],
+        curve: Curves.fastOutSlowIn,
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.yellow,
         ),
       ),
     );

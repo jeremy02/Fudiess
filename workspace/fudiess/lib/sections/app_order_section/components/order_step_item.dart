@@ -43,7 +43,7 @@ class OrderStepItem extends StatelessWidget {
               minHeight: maxWidth
           ),
           padding: EdgeInsets.symmetric(
-              vertical: kDefaultPadding * 2,
+              vertical: Responsive.isMobile(context) ? kDefaultPadding * 2 : kDefaultPadding * 3,
               horizontal: Responsive.isMobile(context) ? kDefaultPadding * 1.5 : kDefaultPadding * 2
           ),
           child: Column(

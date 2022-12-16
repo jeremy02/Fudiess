@@ -17,7 +17,9 @@ class OrderSectionStepsLayout extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (BuildContext ctx, BoxConstraints constraints) {
+
         var maxWidth = constraints.maxWidth * 0.28;
+
         return Flex(
           direction: Responsive.isMobile(context) ? Axis.vertical : Axis.horizontal,
           mainAxisSize: MainAxisSize.max,
