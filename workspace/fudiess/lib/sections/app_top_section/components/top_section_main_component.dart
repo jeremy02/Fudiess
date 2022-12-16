@@ -126,7 +126,7 @@ class TopSectionMainComponent extends StatelessWidget {
                   height: Responsive.isMobile(context) ? kDefaultPadding * 0.8 : 0,
                 ),
                 if (Responsive.isMobile(context))
-                  TopSectionDiscountTextButton(),
+                  const TopSectionDiscountTextButton(),
               ],
             ),
         ),

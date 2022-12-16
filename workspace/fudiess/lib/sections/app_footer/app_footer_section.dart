@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,10 @@ class AppFooterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double horizontalPadding = Responsive.isMobile(context) ? kDefaultPadding
+        : Responsive.isPortrait(context) ? kDefaultPadding * 2 : kDefaultPadding;
+
     return SafeArea(
       child:
       AnimatedContainer(
@@ -34,20 +39,16 @@ class AppFooterSection extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(
             top: Responsive.isMobile(context)
-                ? kDefaultPadding * 4
-                : kDefaultPadding * 8,
-            bottom: Responsive.isMobile(context)
                 ? kDefaultPadding * 2
-                : kDefaultPadding * 4,
-            left: Responsive.isMobile(context)
-                ? kDefaultPadding
-                : kDefaultPadding * 2,
-            right: Responsive.isMobile(context)
-                ? kDefaultPadding
-                : kDefaultPadding * 2,
+                : Responsive.isPortrait(context) ? kDefaultPadding * 2 : kDefaultPadding * 3,
+            bottom: kDefaultPadding * 2,
+            left: horizontalPadding,
+            right: horizontalPadding,
           ),
-          child: Responsive.isMobile(context) ? _buildFooterMobileLayout(
-              context) : _buildFooterLayout(context),
+          child: Responsive.isMobile(context) ?
+          _buildFooterMobileLayout(context)
+              :
+          _buildFooterLayout(context),
         ),
       ),
     );
@@ -144,8 +145,8 @@ class AppFooterSection extends StatelessWidget {
                         addSpacing: true,
                       ),
                     ),
-                    const SizedBox(
-                      width: kDefaultPadding * 2,
+                    SizedBox(
+                      width: Responsive.isPortrait(context) ? kDefaultPadding * 2 : kDefaultPadding,
                     ),
                     Flexible(
                       child: FooterSectionPagesServiceLayout(
