@@ -60,16 +60,17 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   Widget build(BuildContext context) {
     final List menuTabsList = _menuTabcontroller.menuTabItems;
 
-    return SizedBox(
-      height: 240,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        minHeight: 240,
+        maxHeight: 260
+      ),
       child: GestureDetector(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Flex(
+          direction: Axis.horizontal,
           children: [
             Flexible(
                 flex: 2,
