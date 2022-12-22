@@ -3,6 +3,7 @@ import 'package:fudiess/utils/constants.dart';
 import 'package:get/get.dart';
 
 import '../../../components/custom_scroll_behavior.dart';
+import '../../../components/list_scroll_to_index.dart';
 import '../../../utils/responsive.dart';
 import '../models/menu_tabs.dart';
 import 'menu_tab_indicator_item.dart';
@@ -23,6 +24,8 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   int activePageIndex = 0;
   final MenuTabsController _controller = Get.put(MenuTabsController());
   int activeMenuTabIndex = 0;
+
+  final ScrollToIndexController _scrollController = ScrollToIndexController();
 
   @override
   void dispose() {
@@ -131,7 +134,6 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   }
 
   Widget _buildMenuPageViews(BuildContext context, List menuTabsList) {
-    final ScrollController controller = ScrollController();
     
     return PageView(
       controller: _pageController,
@@ -144,70 +146,27 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
             constraints: const BoxConstraints.expand(),
             child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
-                  return Container(
-                    width: double.infinity,
-                    child: ScrollConfiguration(
-                      behavior: CustomScrollBehavior(),
-                      child: ListView(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        children: <Widget>[
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: constraints.maxWidth / 2,
-                                margin: EdgeInsets.all(4.0),
-                                color: Colors.purpleAccent,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
-                                ),
-                              ),
-                              SizedBox(
-                                width: Responsive.isTablet(context) ? kDefaultPadding * 0.35 : kDefaultPadding * 1.25,
-                              ),
-                              Container(
-                                width: constraints.maxWidth / 2,
-                                margin: EdgeInsets.all(4.0),
-                                color: Colors.purpleAccent,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
-                                ),
-                              ),
-                            ],
+                  return ScrollConfiguration(
+                    behavior: CustomScrollBehavior(),
+                    child: ListScrollToIndex(
+                      controller: _scrollController,            // ScrollToIndexController
+                      scrollDirection: Axis.horizontal,   // default Axis.vertical
+                      itemCount: menuTabsList.length,                     // itemCount
+                      itemWidth: constraints.maxWidth,
+                      itemHeight: constraints.maxHeight,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          width: constraints.maxWidth / 2.08,
+                          margin: EdgeInsets.only( // no margin if its the last item
+                            left: index == 0 ? 0 : (Responsive.isTablet(context) ? kDefaultPadding * 0.70 : kDefaultPadding * 1.25),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: constraints.maxWidth / 2,
-                                margin: EdgeInsets.all(4.0),
-                                color: Colors.purpleAccent,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
-                                ),
-                              ),
-                              SizedBox(
-                                width: Responsive.isTablet(context) ? kDefaultPadding * 0.35 : kDefaultPadding * 1.25,
-                              ),
-                              Container(
-                                width: constraints.maxWidth / 2,
-                                margin: EdgeInsets.all(4.0),
-                                color: Colors.purpleAccent,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
-                                ),
-                              ),
-                            ],
+                          color: Colors.purpleAccent,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                            child: Center(child: Text(constraints.maxWidth.toString() + ':::' + menuTabsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
                   );
                 }
