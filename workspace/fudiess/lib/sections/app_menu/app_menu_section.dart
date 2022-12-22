@@ -37,13 +37,30 @@ class AppMenuSection extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
         child: Column(
           children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    _scrollController.listScrollToIndex(index: 0);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  onPressed: () {
+                    _scrollController.listScrollToIndex(index: 3);
+                  },
+                ),
+              ],
+            ),
             NotificationListener<MenuListIndexChanged>(
                 child: MenuSectionMenuLayout(
                   scrollController: _scrollController,
                 ),
                 onNotification: (n) {
-                  print(n.val.toString());
                   print(n.selectedMenuTabIndex.toString());
+                  print(n.selectedMenuTabId.toString());
                   return true;
                 }
             )

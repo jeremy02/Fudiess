@@ -42,18 +42,18 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
     super.initState();
   }
 
-  void onMenuTabSelected(int menuTabIndex, bool isScroll) {
+  void onMenuTabSelected(int selectedMenuTabIndex, bool isScroll, int selectedMenuId) {
     setState(() {
-      activeMenuTabIndex = menuTabIndex;
+      activeMenuTabIndex = selectedMenuTabIndex;
     });
     if(isScroll) {
       FocusScope.of(context).requestFocus(FocusNode());
-      _pageController.animateToPage(menuTabIndex,
+      _pageController.animateToPage(selectedMenuTabIndex,
           duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
+    } else {
+      // pass the selected menu index
+      MenuListIndexChanged(selectedMenuTabIndex, selectedMenuId).dispatch(context);
     }
-    
-    // pass the selected menu index
-    MenuListIndexChanged(true, menuTabIndex).dispatch(context);
   }
 
   @override
@@ -111,7 +111,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                 name: item.name,
                 imagePath: item.imagePath,
                 onSelectedMenuTab: (){
-                  onMenuTabSelected(menuTabsList.indexOf(item), true);
+                  onMenuTabSelected(menuTabsList.indexOf(item), true, item.id);
                 },
                 isActive: activeMenuTabIndex == menuTabsList.indexOf(item)
               )
@@ -144,9 +144,9 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
     
     return PageView(
       controller: _pageController,
-      physics: const ClampingScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (int menuSelectedIndex) {
-        onMenuTabSelected(menuSelectedIndex, false);
+        onMenuTabSelected(menuSelectedIndex, false, menuTabsList[menuSelectedIndex].id);
       },
       children: menuTabsList.map<ConstrainedBox>((item) =>
           ConstrainedBox(
