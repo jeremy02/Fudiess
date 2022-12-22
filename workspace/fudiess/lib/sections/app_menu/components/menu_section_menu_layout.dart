@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:get/get.dart';
 
+import '../../../components/custom_scroll_behavior.dart';
 import '../models/menu_tabs.dart';
 import 'menu_tab_indicator_item.dart';
 import 'menu_tab_item.dart';
@@ -126,6 +127,8 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   }
 
   Widget _buildMenuPageViews(BuildContext context, List menuTabsList) {
+    final ScrollController controller = ScrollController();
+    
     return PageView(
       controller: _pageController,
       physics: const ClampingScrollPhysics(),
@@ -135,8 +138,29 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
       children: menuTabsList.map<ConstrainedBox>((item) =>
           ConstrainedBox(
             constraints: const BoxConstraints.expand(),
-            child: Center(
-              child: Text(item.name),
+            child: ScrollConfiguration(
+              behavior: CustomScrollBehavior(),
+              child: GridView.builder(
+                shrinkWrap: true,
+                primary: false,
+                scrollDirection: Axis.horizontal,
+                physics: const ScrollPhysics(),
+                itemCount: menuTabsList.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  childAspectRatio: 1,
+                ),
+                itemBuilder: (contxt, indx){
+                  return Card(
+                    margin: EdgeInsets.all(4.0),
+                    color: Colors.purpleAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                      child: Center(child: Text(menuTabsList[indx].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
       ).toList()

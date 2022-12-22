@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
           child: Center(
             child: Responsive(
               mobile: SingleChildScrollView(
+                primary: true,
                 physics: const ClampingScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -60,7 +61,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               tablet: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -90,6 +90,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               desktop: SingleChildScrollView(
+                primary: true,
                 physics: const ClampingScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
