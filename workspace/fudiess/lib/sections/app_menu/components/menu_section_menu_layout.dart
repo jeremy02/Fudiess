@@ -3,6 +3,7 @@ import 'package:fudiess/utils/constants.dart';
 import 'package:get/get.dart';
 
 import '../../../components/custom_scroll_behavior.dart';
+import '../../../utils/responsive.dart';
 import '../models/menu_tabs.dart';
 import 'menu_tab_indicator_item.dart';
 import 'menu_tab_item.dart';
@@ -68,15 +69,18 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _buildMenuBar(context, menuTabsList),
-                    const SizedBox(
-                      width: kDefaultPadding,
+                    SizedBox(
+                      width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
                     ),
                     _buildMenuBarIndicator(context, menuTabsList),
-                    const SizedBox(
-                      width: kDefaultPadding,
+                    SizedBox(
+                      width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
                     ),
                   ],
                 ),
+            ),
+            SizedBox(
+              width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
             ),
             Flexible(
               flex: 3,
