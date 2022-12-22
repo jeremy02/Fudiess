@@ -98,18 +98,35 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   Widget _buildMenuBar(BuildContext context, List menuTabsList) {
     return Expanded(
         child: Column(
-          children: menuTabsList.map<MenuTabItem>((item) =>
-              MenuTabItem(
-                key: UniqueKey(),
-                name: item.name,
-                imagePath: item.imagePath,
-                onSelectedMenuTab: (){
-                  onMenuTabSelected(menuTabsList.indexOf(item), true);
-                },
-                isActive: activeMenuTabIndex == menuTabsList.indexOf(item)
-              )
-          ).toList()
-        ),
+        children: [
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              _scrollController.listScrollToIndex(index: 0);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.arrow_forward),
+            onPressed: () {
+              _scrollController.listScrollToIndex(index: 3);
+            },
+          ),
+
+          Column(
+              children: menuTabsList.map<MenuTabItem>((item) =>
+                  MenuTabItem(
+                      key: UniqueKey(),
+                      name: item.name,
+                      imagePath: item.imagePath,
+                      onSelectedMenuTab: (){
+                        onMenuTabSelected(menuTabsList.indexOf(item), true);
+                      },
+                      isActive: activeMenuTabIndex == menuTabsList.indexOf(item)
+                  )
+              ).toList()
+          ),
+        ]
+        )
     );
   }
 
