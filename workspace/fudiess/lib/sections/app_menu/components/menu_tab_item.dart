@@ -61,13 +61,15 @@ class MenuTabItem extends StatelessWidget {
                 const SizedBox(
                   width: kDefaultPadding,
                 ),
-                RichTextTitle(
-                  text: name,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  textColor: isActive ? Colors.white : kTextColor,
-                  alignStart: true,
-                  textScaleFactor: 1.2,
+                Flexible(
+                  child: RichTextTitle(
+                    text: name,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    textColor: isActive ? Colors.white : kTextColor,
+                    alignStart: true,
+                    textScaleFactor: 1.2,
+                  ),
                 ),
               ],
             ),

@@ -80,7 +80,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                 ),
             ),
             SizedBox(
-              width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
+              width: Responsive.isTablet(context) ? 0 : kDefaultPadding * 2,
             ),
             Flexible(
               flex: 3,
@@ -142,29 +142,75 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
       children: menuTabsList.map<ConstrainedBox>((item) =>
           ConstrainedBox(
             constraints: const BoxConstraints.expand(),
-            child: ScrollConfiguration(
-              behavior: CustomScrollBehavior(),
-              child: GridView.builder(
-                shrinkWrap: true,
-                primary: false,
-                scrollDirection: Axis.horizontal,
-                physics: const ScrollPhysics(),
-                itemCount: menuTabsList.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  childAspectRatio: 1,
-                ),
-                itemBuilder: (contxt, indx){
-                  return Card(
-                    margin: EdgeInsets.all(4.0),
-                    color: Colors.purpleAccent,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                      child: Center(child: Text(menuTabsList[indx].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
+            child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  return Container(
+                    width: double.infinity,
+                    child: ScrollConfiguration(
+                      behavior: CustomScrollBehavior(),
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                width: constraints.maxWidth / 2,
+                                margin: EdgeInsets.all(4.0),
+                                color: Colors.purpleAccent,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                                ),
+                              ),
+                              SizedBox(
+                                width: Responsive.isTablet(context) ? kDefaultPadding * 0.35 : kDefaultPadding * 1.25,
+                              ),
+                              Container(
+                                width: constraints.maxWidth / 2,
+                                margin: EdgeInsets.all(4.0),
+                                color: Colors.purpleAccent,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                width: constraints.maxWidth / 2,
+                                margin: EdgeInsets.all(4.0),
+                                color: Colors.purpleAccent,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                                ),
+                              ),
+                              SizedBox(
+                                width: Responsive.isTablet(context) ? kDefaultPadding * 0.35 : kDefaultPadding * 1.25,
+                              ),
+                              Container(
+                                width: constraints.maxWidth / 2,
+                                margin: EdgeInsets.all(4.0),
+                                color: Colors.purpleAccent,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                                  child: Center(child: Text(constraints.maxWidth.toString(), style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
-                },
-              ),
+                }
             ),
           ),
       ).toList()
