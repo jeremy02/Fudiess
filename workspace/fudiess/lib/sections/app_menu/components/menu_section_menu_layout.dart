@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../components/custom_scroll_behavior.dart';
 import '../../../components/list_scroll_to_index.dart';
 import '../../../utils/responsive.dart';
+import '../models/menu_list_index_changed.dart';
 import '../models/menu_tabs.dart';
 import 'menu_tab_indicator_item.dart';
 import 'menu_tab_item.dart';
@@ -12,7 +13,12 @@ import 'menu_tab_item.dart';
 const double borderRadius = 25.0;
 
 class MenuSectionMenuLayout extends StatefulWidget {
-  const MenuSectionMenuLayout({Key? key}) : super(key: key);
+  const MenuSectionMenuLayout({
+    Key? key,
+    required this.scrollController,
+  }) : super(key: key);
+
+  final ScrollToIndexController scrollController;
 
   @override
   _MenuSectionMenuLayoutState createState() => _MenuSectionMenuLayoutState();
@@ -22,10 +28,8 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
 
   final PageController _pageController = PageController();
   int activePageIndex = 0;
-  final MenuTabsController _controller = Get.put(MenuTabsController());
+  final MenuTabsController _menuTabcontroller = Get.put(MenuTabsController());
   int activeMenuTabIndex = 0;
-
-  final ScrollToIndexController _scrollController = ScrollToIndexController();
 
   @override
   void dispose() {
@@ -47,11 +51,14 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
       _pageController.animateToPage(menuTabIndex,
           duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
     }
+    
+    // pass the selected menu index
+    MenuListIndexChanged(true, menuTabIndex).dispatch(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final List menuTabsList = _controller.orderSteps;
+    final List menuTabsList = _menuTabcontroller.menuTabItems;
 
     return SizedBox(
       height: 240,
@@ -98,35 +105,18 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   Widget _buildMenuBar(BuildContext context, List menuTabsList) {
     return Expanded(
         child: Column(
-        children: [
-          IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              _scrollController.listScrollToIndex(index: 0);
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.arrow_forward),
-            onPressed: () {
-              _scrollController.listScrollToIndex(index: 3);
-            },
-          ),
-
-          Column(
-              children: menuTabsList.map<MenuTabItem>((item) =>
-                  MenuTabItem(
-                      key: UniqueKey(),
-                      name: item.name,
-                      imagePath: item.imagePath,
-                      onSelectedMenuTab: (){
-                        onMenuTabSelected(menuTabsList.indexOf(item), true);
-                      },
-                      isActive: activeMenuTabIndex == menuTabsList.indexOf(item)
-                  )
-              ).toList()
-          ),
-        ]
-        )
+          children: menuTabsList.map<MenuTabItem>((item) =>
+              MenuTabItem(
+                key: UniqueKey(),
+                name: item.name,
+                imagePath: item.imagePath,
+                onSelectedMenuTab: (){
+                  onMenuTabSelected(menuTabsList.indexOf(item), true);
+                },
+                isActive: activeMenuTabIndex == menuTabsList.indexOf(item)
+              )
+          ).toList()
+        ),
     );
   }
 
@@ -156,7 +146,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
       controller: _pageController,
       physics: const ClampingScrollPhysics(),
       onPageChanged: (int menuSelectedIndex) {
-        onMenuTabSelected(menuTabsList[menuSelectedIndex], false);
+        onMenuTabSelected(menuSelectedIndex, false);
       },
       children: menuTabsList.map<ConstrainedBox>((item) =>
           ConstrainedBox(
@@ -166,9 +156,9 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                   return ScrollConfiguration(
                     behavior: CustomScrollBehavior(),
                     child: ListScrollToIndex(
-                      controller: _scrollController,            // ScrollToIndexController
-                      scrollDirection: Axis.horizontal,   // default Axis.vertical
-                      itemCount: menuTabsList.length,                     // itemCount
+                      controller: widget.scrollController,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: menuTabsList.length,
                       itemWidth: constraints.maxWidth,
                       itemHeight: constraints.maxHeight,
                       itemBuilder: (BuildContext context, int index) {

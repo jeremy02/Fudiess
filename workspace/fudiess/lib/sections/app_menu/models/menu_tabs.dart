@@ -10,7 +10,7 @@ class MenuTabs {
 
 // For demo list of Menu Tabs
 class MenuTabsController extends GetxController {
-  List<MenuTabs> get orderSteps => [
+  List<MenuTabs> get menuTabItems => [
     MenuTabs(
       id: 1,
       name: "Burger",

@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 
+import '../../components/list_scroll_to_index.dart';
 import 'components/menu_section_menu_layout.dart';
+import 'models/menu_list_index_changed.dart';
 
 class AppMenuSection extends StatelessWidget {
-  const AppMenuSection({
+  AppMenuSection({
     Key? key,
     required this.screenSize,
   }) : super(key: key);
 
   final Size screenSize;
+  final ScrollToIndexController _scrollController = ScrollToIndexController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +36,17 @@ class AppMenuSection extends StatelessWidget {
         // Provide an optional curve to make the animation feel smoother.
         curve: Curves.fastOutSlowIn,
         child: Column(
-          children: const [
-            MenuSectionMenuLayout()
+          children: [
+            NotificationListener<MenuListIndexChanged>(
+                child: MenuSectionMenuLayout(
+                  scrollController: _scrollController,
+                ),
+                onNotification: (n) {
+                  print(n.val.toString());
+                  print(n.selectedMenuTabIndex.toString());
+                  return true;
+                }
+            )
           ],
         ),
       ),
