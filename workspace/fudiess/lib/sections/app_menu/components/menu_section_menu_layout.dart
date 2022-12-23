@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import '../../../components/custom_scroll_behavior.dart';
 import '../../../components/list_scroll_to_index.dart';
 import '../../../utils/responsive.dart';
+import '../controllers/menu_tabs_controller.dart';
 import '../models/menu_list_index_changed.dart';
-import '../models/menu_tabs.dart';
 import 'menu_tab_indicator_item.dart';
 import 'menu_tab_item.dart';
 
