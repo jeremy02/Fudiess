@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 
+import '../../components/forward_back_button.dart';
 import '../../components/list_scroll_to_index.dart';
 import '../../components/rich_text_title.dart';
 import 'components/menu_section_menu_layout.dart';
@@ -89,10 +90,45 @@ class AppMenuSection extends StatelessWidget {
           coloredTextColor: Colors.black,
           textScaleFactor: 1.5,
         ),
-        if(Responsive.isMobile(context))
-          const Spacer()
-        else
-          Spacer()
+        const Spacer(),
+        Responsive.isMobile(context) ? Container()
+            :
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ForwardBackButton(
+                bgColor: Colors.white,
+                padding: kDefaultPadding * 0.70,
+                radius: kDefaultPadding*0.75,
+                elevation: 2.0,
+                icon: const Icon(
+                  Icons.arrow_back_ios_sharp,
+                  size: 22,
+                  color: kDarkBlackColor,
+                ),
+                buttonPress: () {
+                  print('uko fiti');
+                }
+            ),
+            const SizedBox(
+              width: kDefaultPadding,
+            ),
+            ForwardBackButton(
+              bgColor: kPrimaryColor,
+              padding: kDefaultPadding * 0.70,
+              radius: kDefaultPadding*0.75,
+              elevation: 2.0,
+              icon: const Icon(
+                Icons.arrow_forward_ios_sharp,
+                size: 22,
+                color: Colors.white,
+              ),
+              buttonPress: () {
+                print('uko fiti');
+              }
+            ),
+          ],
+        ),
       ],
     );
   }
