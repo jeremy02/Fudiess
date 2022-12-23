@@ -32,7 +32,12 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   final MenuTabItemsController _menuTabItemsController = Get.put(MenuTabItemsController());
   int activeMenuTabIndex = 0;
   List <MenuTabs>_menuTabsList = [];
-  List<MenuTabItems> _menuTabMenuItems = [];
+  List<MenuTabItems> _menuTabMenuItemsList = [];
+  
+  // forward and back buttons active state
+  int _menuTabMenuItemsListIndex = 0;
+  bool forwardButtonActive = false;
+  bool backButtonActive = false;
 
   @override
   void dispose() {
@@ -45,8 +50,38 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   void initState() {
     _menuTabsList = _menuTabController.menuTabs;
     int selectedMenuTabId = _menuTabsList[activeMenuTabIndex].id;
-    _menuTabMenuItems = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuTabId).toList();
+    _menuTabMenuItemsList = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuTabId).toList();
+    
+    // backButtonActive = false;
+    
     super.initState();
+  }
+
+  void menuTabMenuItemsListScrollToIndex(bool isForward) {
+    if(isForward) {
+      int checkNextScrollIndex = _menuTabMenuItemsListIndex + 3;
+      int nextScrollIndex = _menuTabMenuItemsListIndex;
+
+      // print('we can do nothing' + _menuTabMenuItemsListIndex.toString());
+      // print('we can do nothing' + checkNextScrollIndex.toString());
+      // print('we can do nothing' + (_menuTabMenuItemsList.length - 1).toString());
+
+      if((_menuTabMenuItemsListIndex + 3) <= _menuTabMenuItemsList.length - 1) {  // the next item that can be scrolled can allow scroll to +two items
+        print('we can do nothing 1');
+        nextScrollIndex = _menuTabMenuItemsListIndex + 3;
+      } else {
+        if((_menuTabMenuItemsListIndex + 2) == _menuTabMenuItemsList.length - 1) { // the next item that can be scrolled is only +one item
+          print('we can do nothing 2');
+          nextScrollIndex = _menuTabMenuItemsListIndex + 2;
+        } else {
+          print('we can do nothing 3');
+        }
+      }
+      setState(() {
+        _menuTabMenuItemsListIndex = nextScrollIndex;
+      });
+      _scrollController.listScrollToIndex(index: nextScrollIndex);
+    }
   }
 
   @override
@@ -76,12 +111,12 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                   scrollController: _scrollController,
                   activeMenuTabIndex: activeMenuTabIndex,
                   menuTabsList: _menuTabsList,
-                  menuTabMenuItemsList: _menuTabMenuItems
+                  menuTabMenuItemsList: _menuTabMenuItemsList
                 ),
                 onNotification: (res) {
                   setState(() {
                     activeMenuTabIndex = res.selectedMenuTabIndex;
-                    _menuTabMenuItems = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == res.selectedMenuTabId).toList();
+                    _menuTabMenuItemsList = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == res.selectedMenuTabId).toList();
                   });
                   return true;
                 }
@@ -128,8 +163,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                       color: kDarkBlackColor,
                     ),
                     buttonPress: () {
-                      print('uko fiti>>>>' + activeMenuTabIndex.toString());
-                      print('uko fiti>>>>' + _menuTabMenuItems.length.toString());
+                      menuTabMenuItemsListScrollToIndex(false);
                     }
                 ),
                 const SizedBox(
@@ -146,8 +180,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                       color: Colors.white,
                     ),
                     buttonPress: () {
-                      print('uko fiti::::' + activeMenuTabIndex.toString());
-                      print('uko fiti::::' + _menuTabMenuItems.length.toString());
+                      menuTabMenuItemsListScrollToIndex(true);
                     }
                 ),
               ],
