@@ -1,8 +1,8 @@
-class MenuItems {
+class MenuTabItems {
   final int id, menuTabId;
   final String name, price, currency, imagePath;
 
-  MenuItems({
+  MenuTabItems({
     required this.id,
     required this.menuTabId,
     required this.name,

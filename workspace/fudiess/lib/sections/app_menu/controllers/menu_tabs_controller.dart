@@ -4,7 +4,7 @@ import 'package:get/state_manager.dart';
 import '../models/menu_tabs.dart';
 
 class MenuTabsController extends GetxController {
-  List<MenuTabs> get menuTabItems => [
+  List<MenuTabs> get menuTabs => [
     MenuTabs(
       id: 1,
       name: "Burger",

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../components/rich_text_title.dart';
 import '../../../utils/constants.dart';
 
-class MenuTabItem extends StatelessWidget {
-  const MenuTabItem({
+class MenuSectionTabItem extends StatelessWidget {
+  const MenuSectionTabItem({
     required Key key,
     required this.name,
     required this.imagePath,

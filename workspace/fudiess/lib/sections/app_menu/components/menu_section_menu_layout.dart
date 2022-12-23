@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import '../../../components/custom_scroll_behavior.dart';
 import '../../../components/list_scroll_to_index.dart';
 import '../../../utils/responsive.dart';
+import '../controllers/menu_tab_items_controller.dart';
 import '../controllers/menu_tabs_controller.dart';
 import '../models/menu_list_index_changed.dart';
+import '../models/menu_tab_items.dart';
+import 'menu_section_tab_item.dart';
 import 'menu_tab_indicator_item.dart';
-import 'menu_tab_item.dart';
 
 const double borderRadius = 25.0;
 
@@ -27,39 +29,49 @@ class MenuSectionMenuLayout extends StatefulWidget {
 class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with SingleTickerProviderStateMixin {
 
   final PageController _pageController = PageController();
-  int activePageIndex = 0;
-  final MenuTabsController _menuTabcontroller = Get.put(MenuTabsController());
+  final MenuTabsController _menuTabController = Get.put(MenuTabsController());
+  final MenuTabItemsController _menuTabItemsController = Get.put(MenuTabItemsController());
   int activeMenuTabIndex = 0;
+  List _menuTabsList = [];
+  List<MenuTabItems> _menuTabMenuItems = [];
 
   @override
   void dispose() {
     _pageController.dispose();
+    _menuTabController.dispose();
+    _menuTabItemsController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
+    _menuTabsList = _menuTabController.menuTabs;
+    int selectedMenuTabId = _menuTabsList[activeMenuTabIndex].id;
+    _menuTabMenuItems = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuTabId).toList();
+    MenuListIndexChanged(activeMenuTabIndex, selectedMenuTabId, _menuTabMenuItems).dispatch(context);
     super.initState();
   }
 
   void onMenuTabSelected(int selectedMenuTabIndex, bool isScroll, int selectedMenuId) {
-    setState(() {
-      activeMenuTabIndex = selectedMenuTabIndex;
-    });
-    if(isScroll) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      _pageController.animateToPage(selectedMenuTabIndex,
-          duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
-    } else {
-      // pass the selected menu index
-      MenuListIndexChanged(selectedMenuTabIndex, selectedMenuId).dispatch(context);
+    if(activeMenuTabIndex != selectedMenuTabIndex) {
+      setState(() {
+        activeMenuTabIndex = selectedMenuTabIndex;
+        _menuTabMenuItems = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuId).toList();
+      });
+
+      if(isScroll) {
+        FocusScope.of(context).requestFocus(FocusNode());
+        _pageController.animateToPage(selectedMenuTabIndex,
+            duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
+
+        // pass the selected menu index back to parent widget
+        MenuListIndexChanged(selectedMenuTabIndex, selectedMenuId, _menuTabMenuItems).dispatch(context);
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final List menuTabsList = _menuTabcontroller.menuTabItems;
-
     return ConstrainedBox(
       constraints: const BoxConstraints(
         minHeight: 240,
@@ -79,11 +91,11 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    _buildMenuBar(context, menuTabsList),
+                    _buildMenuBar(context),
                     SizedBox(
                       width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
                     ),
-                    _buildMenuBarIndicator(context, menuTabsList),
+                    _buildMenuBarIndicator(context),
                     SizedBox(
                       width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
                     ),
@@ -95,7 +107,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
             ),
             Flexible(
               flex: 3,
-              child: _buildMenuPageViews(context, menuTabsList),
+              child: _buildMenuPageViews(context),
             ),
           ],
         ),
@@ -103,25 +115,25 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
     );
   }
 
-  Widget _buildMenuBar(BuildContext context, List menuTabsList) {
+  Widget _buildMenuBar(BuildContext context) {
     return Expanded(
         child: Column(
-          children: menuTabsList.map<MenuTabItem>((item) =>
-              MenuTabItem(
-                key: UniqueKey(),
-                name: item.name,
-                imagePath: item.imagePath,
-                onSelectedMenuTab: (){
-                  onMenuTabSelected(menuTabsList.indexOf(item), true, item.id);
-                },
-                isActive: activeMenuTabIndex == menuTabsList.indexOf(item)
+          children: _menuTabsList.map<MenuSectionTabItem>((item) =>
+              MenuSectionTabItem(
+                  key: UniqueKey(),
+                  name: item.name,
+                  imagePath: item.imagePath,
+                  onSelectedMenuTab: (){
+                    onMenuTabSelected(_menuTabsList.indexOf(item), true, item.id);
+                  },
+                  isActive: activeMenuTabIndex == _menuTabsList.indexOf(item)
               )
           ).toList()
         ),
     );
   }
 
-  Widget _buildMenuBarIndicator(BuildContext context, List menuTabsList) {
+  Widget _buildMenuBarIndicator(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(
         kDefaultPadding,
@@ -130,10 +142,10 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
         width: kDefaultPadding * 0.30,
         color: kBgColor,
         child: Column(
-            children: menuTabsList.map<MenuTabIndicatorItem>((item) =>
+            children: _menuTabsList.map<MenuTabIndicatorItem>((item) =>
                 MenuTabIndicatorItem(
                     key: UniqueKey(),
-                    isActive: activeMenuTabIndex == menuTabsList.indexOf(item)
+                    isActive: activeMenuTabIndex == _menuTabsList.indexOf(item)
                 )
             ).toList()
         ),
@@ -141,15 +153,16 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
     );
   }
 
-  Widget _buildMenuPageViews(BuildContext context, List menuTabsList) {
+  Widget _buildMenuPageViews(BuildContext context) {
     
     return PageView(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (int menuSelectedIndex) {
-        onMenuTabSelected(menuSelectedIndex, false, menuTabsList[menuSelectedIndex].id);
+        onMenuTabSelected(menuSelectedIndex, false, _menuTabsList[menuSelectedIndex].id);
       },
-      children: menuTabsList.map<ConstrainedBox>((item) =>
+      children: _menuTabsList.map<ConstrainedBox>((item) =>
+
           ConstrainedBox(
             constraints: const BoxConstraints.expand(),
             child: LayoutBuilder(
@@ -159,7 +172,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                     child: ListScrollToIndex(
                       controller: widget.scrollController,
                       scrollDirection: Axis.horizontal,
-                      itemCount: menuTabsList.length,
+                      itemCount: _menuTabsList.length,
                       itemWidth: constraints.maxWidth,
                       itemHeight: constraints.maxHeight,
                       itemBuilder: (BuildContext context, int index) {
@@ -171,7 +184,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                           color: Colors.purpleAccent,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                            child: Center(child: Text(constraints.maxWidth.toString() + ':::' + menuTabsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                            child: Center(child: Text(constraints.maxWidth.toString() + ':::' + _menuTabsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
                           ),
                         );
                       },

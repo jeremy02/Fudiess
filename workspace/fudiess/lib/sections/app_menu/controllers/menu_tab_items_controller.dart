@@ -1,10 +1,10 @@
-import 'package:fudiess/sections/app_menu/models/menu_items.dart';
+import 'package:fudiess/sections/app_menu/models/menu_tab_items.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/state_manager.dart';
 
-class MenuItemsController extends GetxController {
-  List<MenuItems> get menuTabItems => [
-    MenuItems(
+class MenuTabItemsController extends GetxController {
+  List<MenuTabItems> get menuTabItems => [
+    MenuTabItems(
       id: 1,
       menuTabId: 1,
       name: "Cheese Burger",
@@ -12,7 +12,7 @@ class MenuItemsController extends GetxController {
       currency: "\$",
       imagePath: "assets/images/menu_section/cheese_burger.png",
     ),
-    MenuItems(
+    MenuTabItems(
       id: 2,
       menuTabId: 1,
       name: "Cheese Burger (truffle)",
@@ -20,7 +20,7 @@ class MenuItemsController extends GetxController {
       currency: "\$",
       imagePath: "assets/images/menu_section/cheese_truffle_burger.png",
     ),
-    MenuItems(
+    MenuTabItems(
       id: 3,
       menuTabId: 2,
       name: "Hawaiian Pizza",
@@ -28,7 +28,7 @@ class MenuItemsController extends GetxController {
       currency: "\$",
       imagePath: "assets/images/menu_section/hawaiian_pizza.png",
     ),
-    MenuItems(
+    MenuTabItems(
       id: 4,
       menuTabId: 1,
       name: "Portobello Mushroom Burger",

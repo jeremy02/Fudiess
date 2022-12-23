@@ -66,6 +66,7 @@ class AppMenuSection extends StatelessWidget {
                 onNotification: (n) {
                   print(n.selectedMenuTabIndex.toString());
                   print(n.selectedMenuTabId.toString());
+                  print(n.selectedMenuTabItems.toString());
                   return true;
                 }
             )
