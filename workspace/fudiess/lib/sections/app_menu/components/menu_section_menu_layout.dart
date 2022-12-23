@@ -17,14 +17,12 @@ class MenuSectionMenuLayout extends StatefulWidget {
     required this.activeMenuTabIndex,
     required this.menuTabsList,
     required this.menuTabMenuItemsList,
-    required this.listViewScrollController,
   }) : super(key: key);
 
   final ScrollToIndexController scrollController;
   final int activeMenuTabIndex;
   final List <MenuTabs> menuTabsList;
   final List <MenuTabItems> menuTabMenuItemsList;
-  final ScrollController listViewScrollController;
 
   @override
   _MenuSectionMenuLayoutState createState() => _MenuSectionMenuLayoutState();
@@ -142,50 +140,58 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   }
 
   Widget _buildMenuPageViews(BuildContext context) {
-    return PageView(
-      controller: _pageController,
-      physics: const NeverScrollableScrollPhysics(),
-      onPageChanged: (int menuSelectedIndex) {
-        onMenuTabSelected(menuSelectedIndex, false, widget.menuTabsList[menuSelectedIndex].id);
-      },
-      children: widget.menuTabsList.map<ConstrainedBox>((item) =>
-          ConstrainedBox(
-            constraints: const BoxConstraints.expand(),
-            child: LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-                  return ScrollConfiguration(
-                    behavior: CustomScrollBehavior(),
-                    child: ListView.builder(
-                      controller: widget.listViewScrollController,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 31,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          width: constraints.maxWidth / 2.08,
-                          margin: EdgeInsets.only( // no margin if its the last item
-                            left: index == 0 ? 0 : (Responsive.isTablet(context) ? kDefaultPadding * 0.70 : kDefaultPadding * 1.25),
-                          ),
-                          color: Colors.purpleAccent,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                            child: Center(
-                                child: Text(
-                                  index.toString()+'::'+constraints.maxWidth.toString() + ':::' + constraints.maxHeight.toString() + ':::' + (kDefaultPadding * 1.25).toString(),
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                    color: Colors.black54,
-                                  ),
-                                ),
+    final doubleListMarginSpacing = (Responsive.isTablet(context) ? kDefaultPadding * 0.70 : kDefaultPadding * 1.25);
+
+    return Container(
+      color: Colors.black12,
+      child: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: (int menuSelectedIndex) {
+          onMenuTabSelected(menuSelectedIndex, false, widget.menuTabsList[menuSelectedIndex].id);
+        },
+        children: widget.menuTabsList.map<ConstrainedBox>((item) =>
+            ConstrainedBox(
+              constraints: const BoxConstraints.expand(),
+              child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return ScrollConfiguration(
+                      behavior: CustomScrollBehavior(),
+                      child: ListScrollToIndex(
+                        controller: widget.scrollController,
+                        scrollDirection: Axis.horizontal,
+                        itemHorizontalMargin: doubleListMarginSpacing,
+                        itemCount: 31,
+                        itemWidth: constraints.maxWidth,
+                        itemHeight: constraints.maxHeight,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            width: constraints.maxWidth / 2.08,
+                            margin: EdgeInsets.only( // no margin if its the last item
+                              left: index == 0 ? 0 : doubleListMarginSpacing,
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }
+                            color: Colors.purpleAccent,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                              child: Center(
+                                  child: Text(
+                                    index.toString() + "::::" + constraints.maxWidth.toString() + "::::" + (constraints.maxWidth / 2.08).toString(),
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+              ),
             ),
-          ),
-      ).toList()
+        ).toList()
+      ),
     );
   }
 }

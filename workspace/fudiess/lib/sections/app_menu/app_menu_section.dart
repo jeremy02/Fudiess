@@ -62,35 +62,12 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   void menuTabMenuItemsListScrollToIndex(bool isForward) {
     int nextScrollIndex = _menuTabMenuItemsListIndex;
 
-    if(isForward) {
-      if((nextScrollIndex + 3) <= 30) {  // the next item that can be scrolled can allow scroll to +two items
-        print('we can do nothing 1');
-        _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
-      } else {
-        if((nextScrollIndex + 2) == 30) { // the next item that can be scrolled is only +one item
-          print('we can do nothing 2');
-          _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
-        } else {
-          print('we can do nothing 3');
-        }
-      }
-    } else {
-
-    }
-
-
+    _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
     setState(() {
       _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex;
     });
-    var widthOfItem = 667; //in dp. width needed for horizontallistView;
-    var heightOfItem = 260; //in dp. height need for vertical listView;
-    // listViewScrollController.jumpTo((_menuTabMenuItemsListIndex * widthOfItem.toDouble()) + (_menuTabMenuItemsListIndex * 25));
-    listViewScrollController.animateTo(
-        (_menuTabMenuItemsListIndex * widthOfItem.toDouble()) + (_menuTabMenuItemsListIndex * 25),
-        duration: Duration(milliseconds: 500),
-        curve: Curves.ease);
-    // _scrollController.listScrollToIndex(index: _menuTabMenuItemsListIndex);
-    // _scrollController.listScrollToIndex(index: _menuTabMenuItemsListIndex);
+    _scrollController.listScrollToIndex(index: _menuTabMenuItemsListIndex);
+
   }
 
   @override
@@ -121,7 +98,6 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                   activeMenuTabIndex: activeMenuTabIndex,
                   menuTabsList: _menuTabsList,
                   menuTabMenuItemsList: _menuTabMenuItemsList,
-                  listViewScrollController: listViewScrollController,
                 ),
                 onNotification: (res) {
                   setState(() {

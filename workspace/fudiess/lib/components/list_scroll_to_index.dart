@@ -6,6 +6,9 @@ class ListScrollToIndex extends StatefulWidget {
   /// item witdh
   final double itemHeight;
 
+  /// item margin for horizontal items
+  final double itemHorizontalMargin;
+
   /// item height
   final Axis? scrollDirection;
 
@@ -30,6 +33,7 @@ class ListScrollToIndex extends StatefulWidget {
         this.addAutomaticKeepAlives,
         required this.itemWidth,
         required this.itemHeight,
+        required this.itemHorizontalMargin,
         required this.itemCount,
         required this.itemBuilder,
         this.scrollDirection,
@@ -51,7 +55,9 @@ class _ListScrollToIndexState extends State<ListScrollToIndex> {
           duration: widget.duration ?? const Duration(milliseconds: 1000),
           curve: Curves.linear);
     } else if (widget.scrollDirection == Axis.horizontal) {
-      _scrollController.animateTo(index * widget.itemWidth.toDouble(),
+      print((widget.itemHorizontalMargin).toString());
+      _scrollController.animateTo(
+            (index * widget.itemWidth.toDouble()) + (index * widget.itemHorizontalMargin),
           duration: widget.duration ?? const Duration(milliseconds: 1000),
           curve: Curves.linear);
     } else {
