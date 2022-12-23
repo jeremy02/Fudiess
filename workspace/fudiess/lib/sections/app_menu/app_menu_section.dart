@@ -33,7 +33,9 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   int activeMenuTabIndex = 0;
   List <MenuTabs>_menuTabsList = [];
   List<MenuTabItems> _menuTabMenuItemsList = [];
-  
+
+  final listViewScrollController = ScrollController();
+
   // forward and back buttons active state
   int _menuTabMenuItemsListIndex = 0;
   bool forwardButtonActive = false;
@@ -51,37 +53,44 @@ class _AppMenuSectionState extends State<AppMenuSection> {
     _menuTabsList = _menuTabController.menuTabs;
     int selectedMenuTabId = _menuTabsList[activeMenuTabIndex].id;
     _menuTabMenuItemsList = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuTabId).toList();
-    
+
     // backButtonActive = false;
-    
+
     super.initState();
   }
 
   void menuTabMenuItemsListScrollToIndex(bool isForward) {
+    int nextScrollIndex = _menuTabMenuItemsListIndex;
+
     if(isForward) {
-      int checkNextScrollIndex = _menuTabMenuItemsListIndex + 3;
-      int nextScrollIndex = _menuTabMenuItemsListIndex;
-
-      // print('we can do nothing' + _menuTabMenuItemsListIndex.toString());
-      // print('we can do nothing' + checkNextScrollIndex.toString());
-      // print('we can do nothing' + (_menuTabMenuItemsList.length - 1).toString());
-
-      if((_menuTabMenuItemsListIndex + 3) <= _menuTabMenuItemsList.length - 1) {  // the next item that can be scrolled can allow scroll to +two items
+      if((nextScrollIndex + 3) <= 30) {  // the next item that can be scrolled can allow scroll to +two items
         print('we can do nothing 1');
-        nextScrollIndex = _menuTabMenuItemsListIndex + 3;
+        _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
       } else {
-        if((_menuTabMenuItemsListIndex + 2) == _menuTabMenuItemsList.length - 1) { // the next item that can be scrolled is only +one item
+        if((nextScrollIndex + 2) == 30) { // the next item that can be scrolled is only +one item
           print('we can do nothing 2');
-          nextScrollIndex = _menuTabMenuItemsListIndex + 2;
+          _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
         } else {
           print('we can do nothing 3');
         }
       }
-      setState(() {
-        _menuTabMenuItemsListIndex = nextScrollIndex;
-      });
-      _scrollController.listScrollToIndex(index: nextScrollIndex);
+    } else {
+
     }
+
+
+    setState(() {
+      _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex;
+    });
+    var widthOfItem = 667; //in dp. width needed for horizontallistView;
+    var heightOfItem = 260; //in dp. height need for vertical listView;
+    // listViewScrollController.jumpTo((_menuTabMenuItemsListIndex * widthOfItem.toDouble()) + (_menuTabMenuItemsListIndex * 25));
+    listViewScrollController.animateTo(
+        (_menuTabMenuItemsListIndex * widthOfItem.toDouble()) + (_menuTabMenuItemsListIndex * 25),
+        duration: Duration(milliseconds: 500),
+        curve: Curves.ease);
+    // _scrollController.listScrollToIndex(index: _menuTabMenuItemsListIndex);
+    // _scrollController.listScrollToIndex(index: _menuTabMenuItemsListIndex);
   }
 
   @override
@@ -111,7 +120,8 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                   scrollController: _scrollController,
                   activeMenuTabIndex: activeMenuTabIndex,
                   menuTabsList: _menuTabsList,
-                  menuTabMenuItemsList: _menuTabMenuItemsList
+                  menuTabMenuItemsList: _menuTabMenuItemsList,
+                  listViewScrollController: listViewScrollController,
                 ),
                 onNotification: (res) {
                   setState(() {

@@ -17,12 +17,14 @@ class MenuSectionMenuLayout extends StatefulWidget {
     required this.activeMenuTabIndex,
     required this.menuTabsList,
     required this.menuTabMenuItemsList,
+    required this.listViewScrollController,
   }) : super(key: key);
 
   final ScrollToIndexController scrollController;
   final int activeMenuTabIndex;
   final List <MenuTabs> menuTabsList;
   final List <MenuTabItems> menuTabMenuItemsList;
+  final ScrollController listViewScrollController;
 
   @override
   _MenuSectionMenuLayoutState createState() => _MenuSectionMenuLayoutState();
@@ -147,19 +149,16 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
         onMenuTabSelected(menuSelectedIndex, false, widget.menuTabsList[menuSelectedIndex].id);
       },
       children: widget.menuTabsList.map<ConstrainedBox>((item) =>
-
           ConstrainedBox(
             constraints: const BoxConstraints.expand(),
             child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return ScrollConfiguration(
                     behavior: CustomScrollBehavior(),
-                    child: ListScrollToIndex(
-                      controller: widget.scrollController,
+                    child: ListView.builder(
+                      controller: widget.listViewScrollController,
                       scrollDirection: Axis.horizontal,
-                      itemCount: widget.menuTabsList.length,
-                      itemWidth: constraints.maxWidth,
-                      itemHeight: constraints.maxHeight,
+                      itemCount: 31,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           width: constraints.maxWidth / 2.08,
@@ -171,7 +170,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                             padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
                             child: Center(
                                 child: Text(
-                                  widget.activeMenuTabIndex.toString()+'::'+constraints.maxWidth.toString() + ':::' + widget.menuTabsList[index].name,
+                                  index.toString()+'::'+constraints.maxWidth.toString() + ':::' + constraints.maxHeight.toString() + ':::' + (kDefaultPadding * 1.25).toString(),
                                   style: const TextStyle(
                                       fontSize: 14,
                                     color: Colors.black54,

@@ -36,13 +36,5 @@ class MenuTabItemsController extends GetxController {
       currency: "\$",
       imagePath: "assets/images/menu_section/portobello_mushroom_burger.png",
     ),
-    MenuTabItems(
-      id: 5,
-      menuTabId: 1,
-      name: "Wild Salmon Burger",
-      price: "25",
-      currency: "\$",
-      imagePath: "assets/images/menu_section/wild_salmon_burger.png",
-    ),
   ];
 }
