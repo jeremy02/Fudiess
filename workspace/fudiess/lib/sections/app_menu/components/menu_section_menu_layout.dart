@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/utils/constants.dart';
-import 'package:get/get.dart';
 
 import '../../../components/custom_scroll_behavior.dart';
 import '../../../components/list_scroll_to_index.dart';
 import '../../../utils/responsive.dart';
-import '../controllers/menu_tab_items_controller.dart';
-import '../controllers/menu_tabs_controller.dart';
 import '../models/menu_list_index_changed.dart';
 import '../models/menu_tab_items.dart';
+import '../models/menu_tabs.dart';
 import 'menu_section_tab_item.dart';
 import 'menu_tab_indicator_item.dart';
-
-const double borderRadius = 25.0;
 
 class MenuSectionMenuLayout extends StatefulWidget {
   const MenuSectionMenuLayout({
     Key? key,
     required this.scrollController,
+    required this.activeMenuTabIndex,
+    required this.menuTabsList,
+    required this.menuTabMenuItemsList,
   }) : super(key: key);
 
   final ScrollToIndexController scrollController;
+  final int activeMenuTabIndex;
+  final List <MenuTabs> menuTabsList;
+  final List <MenuTabItems> menuTabMenuItemsList;
 
   @override
   _MenuSectionMenuLayoutState createState() => _MenuSectionMenuLayoutState();
@@ -29,43 +31,27 @@ class MenuSectionMenuLayout extends StatefulWidget {
 class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with SingleTickerProviderStateMixin {
 
   final PageController _pageController = PageController();
-  final MenuTabsController _menuTabController = Get.put(MenuTabsController());
-  final MenuTabItemsController _menuTabItemsController = Get.put(MenuTabItemsController());
-  int activeMenuTabIndex = 0;
-  List _menuTabsList = [];
-  List<MenuTabItems> _menuTabMenuItems = [];
 
   @override
   void dispose() {
     _pageController.dispose();
-    _menuTabController.dispose();
-    _menuTabItemsController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
-    _menuTabsList = _menuTabController.menuTabs;
-    int selectedMenuTabId = _menuTabsList[activeMenuTabIndex].id;
-    _menuTabMenuItems = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuTabId).toList();
-    MenuListIndexChanged(activeMenuTabIndex, selectedMenuTabId, _menuTabMenuItems).dispatch(context);
     super.initState();
   }
 
   void onMenuTabSelected(int selectedMenuTabIndex, bool isScroll, int selectedMenuId) {
-    if(activeMenuTabIndex != selectedMenuTabIndex) {
-      setState(() {
-        activeMenuTabIndex = selectedMenuTabIndex;
-        _menuTabMenuItems = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuId).toList();
-      });
-
+    if(widget.activeMenuTabIndex != selectedMenuTabIndex) {
       if(isScroll) {
         FocusScope.of(context).requestFocus(FocusNode());
         _pageController.animateToPage(selectedMenuTabIndex,
             duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
 
         // pass the selected menu index back to parent widget
-        MenuListIndexChanged(selectedMenuTabIndex, selectedMenuId, _menuTabMenuItems).dispatch(context);
+        MenuListIndexChanged(selectedMenuTabIndex, selectedMenuId).dispatch(context);
       }
     }
   }
@@ -118,15 +104,15 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   Widget _buildMenuBar(BuildContext context) {
     return Expanded(
         child: Column(
-          children: _menuTabsList.map<MenuSectionTabItem>((item) =>
+          children: widget.menuTabsList.map<MenuSectionTabItem>((item) =>
               MenuSectionTabItem(
                   key: UniqueKey(),
                   name: item.name,
                   imagePath: item.imagePath,
                   onSelectedMenuTab: (){
-                    onMenuTabSelected(_menuTabsList.indexOf(item), true, item.id);
+                    onMenuTabSelected(widget.menuTabsList.indexOf(item), true, item.id);
                   },
-                  isActive: activeMenuTabIndex == _menuTabsList.indexOf(item)
+                  isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item)
               )
           ).toList()
         ),
@@ -142,10 +128,10 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
         width: kDefaultPadding * 0.30,
         color: kBgColor,
         child: Column(
-            children: _menuTabsList.map<MenuTabIndicatorItem>((item) =>
+            children: widget.menuTabsList.map<MenuTabIndicatorItem>((item) =>
                 MenuTabIndicatorItem(
                     key: UniqueKey(),
-                    isActive: activeMenuTabIndex == _menuTabsList.indexOf(item)
+                    isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item)
                 )
             ).toList()
         ),
@@ -154,14 +140,13 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   }
 
   Widget _buildMenuPageViews(BuildContext context) {
-    
     return PageView(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (int menuSelectedIndex) {
-        onMenuTabSelected(menuSelectedIndex, false, _menuTabsList[menuSelectedIndex].id);
+        onMenuTabSelected(menuSelectedIndex, false, widget.menuTabsList[menuSelectedIndex].id);
       },
-      children: _menuTabsList.map<ConstrainedBox>((item) =>
+      children: widget.menuTabsList.map<ConstrainedBox>((item) =>
 
           ConstrainedBox(
             constraints: const BoxConstraints.expand(),
@@ -172,7 +157,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                     child: ListScrollToIndex(
                       controller: widget.scrollController,
                       scrollDirection: Axis.horizontal,
-                      itemCount: _menuTabsList.length,
+                      itemCount: widget.menuTabsList.length,
                       itemWidth: constraints.maxWidth,
                       itemHeight: constraints.maxHeight,
                       itemBuilder: (BuildContext context, int index) {
@@ -184,7 +169,15 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                           color: Colors.purpleAccent,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                            child: Center(child: Text(constraints.maxWidth.toString() + ':::' + _menuTabsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                            child: Center(
+                                child: Text(
+                                  widget.activeMenuTabIndex.toString()+'::'+constraints.maxWidth.toString() + ':::' + widget.menuTabsList[index].name,
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                            ),
                           ),
                         );
                       },
