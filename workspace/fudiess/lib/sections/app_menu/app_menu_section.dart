@@ -58,34 +58,39 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   }
 
   void menuTabMenuItemsListScrollToIndex(bool isForward) {
-    int nextScrollIndex = (_menuTabMenuItemsListIndex > 0) ? _menuTabMenuItemsListIndex : 1;
+    int calculatedListIndex = (_menuTabMenuItemsListIndex * 0.5).floor();
+    int nextScrollIndex = (calculatedListIndex < 0) ? 0 : calculatedListIndex;
     bool isScroll = true;
 
     //TODO delete this
     int scrollLength = 8;
+
     if(isForward) {
-      _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
-      if(((_menuTabMenuItemsListIndex * 2) + 1) <= scrollLength) {  // the next item that can be scrolled can allow scroll to +two items
-        print('we can do nothing 1');
-        nextScrollIndex = (_menuTabMenuItemsListIndex * 2) + 1;
+      calculatedListIndex = calculatedListIndex + 1;
+      if(((calculatedListIndex * 2) + 1) <= scrollLength) {  // the next item that can be scrolled can allow scroll to +two items
+        nextScrollIndex = (calculatedListIndex * 2) + 1;
       } else {
-        if(((_menuTabMenuItemsListIndex * 2)) == scrollLength) { // the next item that can be scrolled is only +one item
-          print('we can do nothing 2');
-          nextScrollIndex = (_menuTabMenuItemsListIndex * 2);
+        if(((calculatedListIndex * 2)) == scrollLength) { // the next item that can be scrolled is only +one item
+          nextScrollIndex = (calculatedListIndex * 2);
         } else {
-          print('we can do nothing 3');
           isScroll = false;
         }
       }
     } else {
-
+      calculatedListIndex = calculatedListIndex - 1;
+      if(calculatedListIndex < 0) {
+        nextScrollIndex = 0;
+        isScroll = false;
+      }else{
+        nextScrollIndex = calculatedListIndex <=0 ? 0 : (calculatedListIndex * 2) + 1;
+      }
     }
 
     if(isScroll){
       print(_menuTabMenuItemsListIndex.toString() + ":::::" + nextScrollIndex.toString());
 
       setState(() {
-        _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex;
+        _menuTabMenuItemsListIndex = nextScrollIndex;
       });
       _scrollController.listScrollToIndex(index: nextScrollIndex);
     }
