@@ -55,7 +55,6 @@ class _ListScrollToIndexState extends State<ListScrollToIndex> {
           duration: widget.duration ?? const Duration(milliseconds: 1000),
           curve: Curves.linear);
     } else if (widget.scrollDirection == Axis.horizontal) {
-      print((widget.itemHorizontalMargin).toString());
       _scrollController.animateTo(
             (index * widget.itemWidth.toDouble()) + (index * widget.itemHorizontalMargin),
           duration: widget.duration ?? const Duration(milliseconds: 1000),

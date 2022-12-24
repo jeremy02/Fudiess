@@ -34,8 +34,6 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   List <MenuTabs>_menuTabsList = [];
   List<MenuTabItems> _menuTabMenuItemsList = [];
 
-  final listViewScrollController = ScrollController();
-
   // forward and back buttons active state
   int _menuTabMenuItemsListIndex = 0;
   bool forwardButtonActive = false;
@@ -60,14 +58,37 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   }
 
   void menuTabMenuItemsListScrollToIndex(bool isForward) {
-    int nextScrollIndex = _menuTabMenuItemsListIndex;
+    int nextScrollIndex = (_menuTabMenuItemsListIndex > 0) ? _menuTabMenuItemsListIndex : 1;
+    bool isScroll = true;
 
-    _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
-    setState(() {
-      _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex;
-    });
-    _scrollController.listScrollToIndex(index: _menuTabMenuItemsListIndex);
+    //TODO delete this
+    int scrollLength = 8;
+    if(isForward) {
+      _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex + 1;
+      if(((_menuTabMenuItemsListIndex * 2) + 1) <= scrollLength) {  // the next item that can be scrolled can allow scroll to +two items
+        print('we can do nothing 1');
+        nextScrollIndex = (_menuTabMenuItemsListIndex * 2) + 1;
+      } else {
+        if(((_menuTabMenuItemsListIndex * 2)) == scrollLength) { // the next item that can be scrolled is only +one item
+          print('we can do nothing 2');
+          nextScrollIndex = (_menuTabMenuItemsListIndex * 2);
+        } else {
+          print('we can do nothing 3');
+          isScroll = false;
+        }
+      }
+    } else {
 
+    }
+
+    if(isScroll){
+      print(_menuTabMenuItemsListIndex.toString() + ":::::" + nextScrollIndex.toString());
+
+      setState(() {
+        _menuTabMenuItemsListIndex = _menuTabMenuItemsListIndex;
+      });
+      _scrollController.listScrollToIndex(index: nextScrollIndex);
+    }
   }
 
   @override
@@ -97,7 +118,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                   scrollController: _scrollController,
                   activeMenuTabIndex: activeMenuTabIndex,
                   menuTabsList: _menuTabsList,
-                  menuTabMenuItemsList: _menuTabMenuItemsList,
+                  menuTabMenuItemsList: _menuTabMenuItemsList
                 ),
                 onNotification: (res) {
                   setState(() {

@@ -161,27 +161,32 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                         controller: widget.scrollController,
                         scrollDirection: Axis.horizontal,
                         itemHorizontalMargin: doubleListMarginSpacing,
-                        itemCount: 31,
+                        itemCount: 9,
                         itemWidth: constraints.maxWidth,
                         itemHeight: constraints.maxHeight,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
-                            width: constraints.maxWidth / 2.08,
+                            width: ((constraints.maxWidth) / 2) - (doubleListMarginSpacing / 2),
                             margin: EdgeInsets.only( // no margin if its the last item
                               left: index == 0 ? 0 : doubleListMarginSpacing,
                             ),
                             color: Colors.purpleAccent,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                              child: Center(
-                                  child: Text(
-                                    index.toString() + "::::" + constraints.maxWidth.toString() + "::::" + (constraints.maxWidth / 2.08).toString(),
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                      color: Colors.black54,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                        'https://miro.medium.com/max/1400/1*-6WdIcd88w3pfphHOYln3Q.png',
+                                      ),
                                     ),
                                   ),
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         },
