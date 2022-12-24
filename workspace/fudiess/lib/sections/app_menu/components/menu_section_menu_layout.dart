@@ -161,7 +161,7 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                         controller: widget.scrollController,
                         scrollDirection: Axis.horizontal,
                         itemHorizontalMargin: doubleListMarginSpacing,
-                        itemCount: 9,
+                        itemCount: widget.menuTabMenuItemsList.length,
                         itemWidth: constraints.maxWidth,
                         itemHeight: constraints.maxHeight,
                         itemBuilder: (BuildContext context, int index) {
@@ -171,27 +171,40 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                               left: index == 0 ? 0 : doubleListMarginSpacing,
                             ),
                             color: Colors.purpleAccent,
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                        'https://miro.medium.com/max/1400/1*-6WdIcd88w3pfphHOYln3Q.png',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: Center(child: Text(constraints.maxWidth.toString() + ':::' + widget.menuTabMenuItemsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
                           );
                         },
                       ),
                     );
+
+                    // return Container(
+                    //   width: ((constraints.maxWidth) / 2) - (doubleListMarginSpacing / 2),
+                    //   margin: EdgeInsets.only( // no margin if its the last item
+                    //     left: index == 0 ? 0 : doubleListMarginSpacing,
+                    //   ),
+                    //   color: Colors.purpleAccent,
+                    //   child: Stack(
+                    //     fit: StackFit.expand,
+                    //     children: [
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(20),
+                    //           // image: DecorationImage(
+                    //           //   fit: BoxFit.fill,
+                    //           //   image: NetworkImage(
+                    //           //     'https://miro.medium.com/max/1400/1*-6WdIcd88w3pfphHOYln3Q.png',
+                    //           //   ),
+                    //           // ),
+                    //         ),
+                    //         color: Colors.purpleAccent,
+                    //         child: Padding(
+                    //           padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
+                    //           child: Center(child: Text(constraints.maxWidth.toString() + ':::' + menuTabsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // );
                   }
               ),
             ),

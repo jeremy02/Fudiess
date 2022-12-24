@@ -62,15 +62,12 @@ class _AppMenuSectionState extends State<AppMenuSection> {
     int nextScrollIndex = (calculatedListIndex < 0) ? 0 : calculatedListIndex;
     bool isScroll = true;
 
-    //TODO delete this
-    int scrollLength = 8;
-
     if(isForward) {
       calculatedListIndex = calculatedListIndex + 1;
-      if(((calculatedListIndex * 2) + 1) <= scrollLength) {  // the next item that can be scrolled can allow scroll to +two items
+      if(((calculatedListIndex * 2) + 1) <= (_menuTabMenuItemsList.length - 1)) {  // the next item that can be scrolled can allow scroll to +two items
         nextScrollIndex = (calculatedListIndex * 2) + 1;
       } else {
-        if(((calculatedListIndex * 2)) == scrollLength) { // the next item that can be scrolled is only +one item
+        if(((calculatedListIndex * 2)) == (_menuTabMenuItemsList.length - 1)) { // the next item that can be scrolled is only +one item
           nextScrollIndex = (calculatedListIndex * 2);
         } else {
           isScroll = false;
@@ -92,7 +89,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
       setState(() {
         _menuTabMenuItemsListIndex = nextScrollIndex;
       });
-      _scrollController.listScrollToIndex(index: nextScrollIndex);
+      _scrollController.listScrollToIndex(index: calculatedListIndex);
     }
   }
 
@@ -165,14 +162,14 @@ class _AppMenuSectionState extends State<AppMenuSection> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ForwardBackButton(
-                    bgColor: Colors.white,
+                    bgColor: _menuTabMenuItemsListIndex - 1 <= 0 ? Colors.white : kPrimaryColor,
                     padding: kDefaultPadding * 0.70,
                     radius: kDefaultPadding*0.75,
                     elevation: 2.0,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back_ios_sharp,
                       size: 22,
-                      color: kDarkBlackColor,
+                      color: _menuTabMenuItemsListIndex - 1 <= 0 ? kDarkBlackColor : Colors.white,
                     ),
                     buttonPress: () {
                       menuTabMenuItemsListScrollToIndex(false);
@@ -182,14 +179,14 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                   width: kDefaultPadding,
                 ),
                 ForwardBackButton(
-                    bgColor: kPrimaryColor,
+                    bgColor: _menuTabMenuItemsListIndex + 1 <= (_menuTabMenuItemsList.length - 1) ? kPrimaryColor : Colors.white,
                     padding: kDefaultPadding * 0.70,
                     radius: kDefaultPadding*0.75,
                     elevation: 2.0,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_forward_ios_sharp,
                       size: 22,
-                      color: Colors.white,
+                      color: _menuTabMenuItemsListIndex + 1 <= (_menuTabMenuItemsList.length - 1) ? Colors.white : kDarkBlackColor,
                     ),
                     buttonPress: () {
                       menuTabMenuItemsListScrollToIndex(true);
