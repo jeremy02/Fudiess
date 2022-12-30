@@ -47,9 +47,7 @@ class FoodCompaniesComponent extends StatelessWidget {
                 imagePath: _controller.foodCompanies[index].imagePath,
                 width: Responsive.isMobile(context) ? calculatedWidth * 0.08 : calculatedWidth * 0.12,
                 height: Responsive.isMobile(context) ? calculatedWidth * 0.10 : calculatedWidth * 0.12,
-                press: () => (index) {
-                  // print(index);
-                },
+                press: () => (index) {},
                 key: ObjectKey(_controller.foodCompanies[index]),
               ),
             ),

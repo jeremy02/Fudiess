@@ -45,7 +45,7 @@ class OrderSectionStepsLayout extends StatelessWidget {
                   imagePath: _controller.orderSteps[index].imagePath,
                   maxWidth: Responsive.isMobile(context) ? constraints.maxWidth * 0.5 : maxWidth,
                   press: () => (index) {
-                    // print(index);
+
                   },
                   key: ObjectKey(_controller.orderSteps[index]),
                 ),
@@ -66,9 +66,7 @@ class OrderSectionStepsLayout extends StatelessWidget {
               caption: _controller.orderSteps[index].caption,
               imagePath: _controller.orderSteps[index].imagePath,
               maxWidth: Responsive.isMobile(context) ? constraints.maxWidth * 0.5 : maxWidth,
-              press: () => (index) {
-                // print(index);
-              },
+              press: () => (index) {},
               key: ObjectKey(_controller.orderSteps[index]),
             ),
           ),

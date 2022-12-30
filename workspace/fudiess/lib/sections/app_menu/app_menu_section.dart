@@ -52,8 +52,6 @@ class _AppMenuSectionState extends State<AppMenuSection> {
     int selectedMenuTabId = _menuTabsList[activeMenuTabIndex].id;
     _menuTabMenuItemsList = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == selectedMenuTabId).toList();
 
-    // backButtonActive = false;
-
     super.initState();
   }
 
@@ -84,8 +82,6 @@ class _AppMenuSectionState extends State<AppMenuSection> {
     }
 
     if(isScroll){
-      print(_menuTabMenuItemsListIndex.toString() + ":::::" + nextScrollIndex.toString());
-
       setState(() {
         _menuTabMenuItemsListIndex = nextScrollIndex;
       });
