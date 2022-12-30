@@ -8,6 +8,8 @@ class RichTextTitle extends StatelessWidget {
   final bool? alignStart;
   final String? coloredText;
   final Color? coloredTextColor;
+  final double? coloredTextFontSize;
+  final FontWeight? coloredTextFontWeight;
   final double? textScaleFactor;
 
   const RichTextTitle({
@@ -19,6 +21,8 @@ class RichTextTitle extends StatelessWidget {
     this.alignStart = false,
     this.coloredText,
     this.coloredTextColor,
+    this.coloredTextFontSize,
+    this.coloredTextFontWeight,
     this.textScaleFactor,
   }) : super(key: key);
 
@@ -39,7 +43,9 @@ class RichTextTitle extends StatelessWidget {
           TextSpan(
             text: coloredText,
             style: TextStyle(
+              fontSize: coloredTextFontSize ?? fontSize,
               color: coloredTextColor,
+              fontWeight: coloredTextFontWeight ?? fontWeight,
             ),
           )
         ]

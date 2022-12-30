@@ -41,10 +41,13 @@ class FooterSectionPagesServiceLayout extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildFooterPageServiceItems(
-                context,
-                pageServicesList.asMap().containsKey(0) ? (pageServicesList[0].isNotEmpty ? pageServicesList[0] : null) : null,
-                pageServicesList.asMap().containsKey(1) ? (pageServicesList[1].isNotEmpty ? pageServicesList[1] : null) : null,
+              Flexible(
+                flex: 1,
+                child: _buildFooterPageServiceItems(
+                  context,
+                  pageServicesList.asMap().containsKey(0) ? (pageServicesList[0].isNotEmpty ? pageServicesList[0] : null) : null,
+                  pageServicesList.asMap().containsKey(1) ? (pageServicesList[1].isNotEmpty ? pageServicesList[1] : null) : null,
+                ),
               ),
               _buildFooterPageServiceItems(
                   context,

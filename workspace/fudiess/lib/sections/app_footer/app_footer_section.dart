@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,10 +17,6 @@ class AppFooterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    double horizontalPadding = Responsive.isMobile(context) ? kDefaultPadding
-        : Responsive.isPortrait(context) ? kDefaultPadding * 2 : kDefaultPadding;
-
     return SafeArea(
       child:
       AnimatedContainer(
@@ -39,16 +34,20 @@ class AppFooterSection extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(
             top: Responsive.isMobile(context)
+                ? kDefaultPadding * 4
+                : kDefaultPadding * 8,
+            bottom: Responsive.isMobile(context)
                 ? kDefaultPadding * 2
-                : Responsive.isPortrait(context) ? kDefaultPadding * 2 : kDefaultPadding * 3,
-            bottom: kDefaultPadding * 2,
-            left: horizontalPadding,
-            right: horizontalPadding,
+                : kDefaultPadding * 4,
+            left: Responsive.isMobile(context)
+                ? kDefaultPadding
+                : kDefaultPadding * 2,
+            right: Responsive.isMobile(context)
+                ? kDefaultPadding
+                : kDefaultPadding * 2,
           ),
-          child: Responsive.isMobile(context) ?
-          _buildFooterMobileLayout(context)
-              :
-          _buildFooterLayout(context),
+          child: Responsive.isMobile(context) ? _buildFooterMobileLayout(
+              context) : _buildFooterLayout(context),
         ),
       ),
     );
@@ -59,7 +58,7 @@ class AppFooterSection extends StatelessWidget {
     final FooterSectionsController _controller = Get.put(FooterSectionsController());
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
@@ -77,7 +76,7 @@ class AppFooterSection extends StatelessWidget {
             Flexible(
               flex: 3,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
@@ -129,44 +128,44 @@ class AppFooterSection extends StatelessWidget {
           width: Responsive.isTablet(context) ? kDefaultPadding * 2 : kDefaultPadding * 4,
         ),
         Flexible(
-            flex: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Flexible(
-                      child: FooterSectionPagesServiceLayout(
-                        title: _controller.footerPagesTitle,
-                        pageServicesList: _controller.footerPages,
-                        addSpacing: true,
-                      ),
+          flex: 3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Flexible(
+                    child: FooterSectionPagesServiceLayout(
+                      title: _controller.footerPagesTitle,
+                      pageServicesList: _controller.footerPages,
+                      addSpacing: true,
                     ),
-                    SizedBox(
-                      width: Responsive.isPortrait(context) ? kDefaultPadding * 2 : kDefaultPadding,
+                  ),
+                  const SizedBox(
+                    width: kDefaultPadding * 2,
+                  ),
+                  Flexible(
+                    child: FooterSectionPagesServiceLayout(
+                      title: _controller.footerServicesTitle,
+                      pageServicesList: _controller.footerServices,
+                      addSpacing: true,
                     ),
-                    Flexible(
-                      child: FooterSectionPagesServiceLayout(
-                        title: _controller.footerServicesTitle,
-                        pageServicesList: _controller.footerServices,
-                        addSpacing: true,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: kDefaultPadding * 2,
-                ),
-                FooterSectionPagesServiceLayout(
-                  title: _controller.footerCompaniesTitle,
-                  pageServicesList: _controller.footerCompanies,
-                  addSpacing: false,
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: kDefaultPadding * 2,
+              ),
+              FooterSectionPagesServiceLayout(
+                title: _controller.footerCompaniesTitle,
+                pageServicesList: _controller.footerCompanies,
+                addSpacing: false,
+              ),
+            ],
+          ),
         ),
       ],
     );

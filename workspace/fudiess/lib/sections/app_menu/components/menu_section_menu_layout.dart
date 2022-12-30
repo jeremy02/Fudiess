@@ -7,6 +7,7 @@ import '../../../utils/responsive.dart';
 import '../models/menu_list_index_changed.dart';
 import '../models/menu_tab_items.dart';
 import '../models/menu_tabs.dart';
+import 'menu_card_item.dart';
 import 'menu_section_tab_item.dart';
 import 'menu_tab_indicator_item.dart';
 
@@ -140,11 +141,9 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   }
 
   Widget _buildMenuPageViews(BuildContext context) {
-    final doubleListMarginSpacing = (Responsive.isTablet(context) ? kDefaultPadding * 0.70 : kDefaultPadding * 1.25);
+    final doubleListMarginSpacing = (Responsive.isDesktop(context) ? kDefaultPadding * 1.75 : kDefaultPadding * 0.70);
 
-    return Container(
-      color: Colors.black12,
-      child: PageView(
+    return PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         onPageChanged: (int menuSelectedIndex) {
@@ -165,51 +164,22 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
                         itemWidth: constraints.maxWidth,
                         itemHeight: constraints.maxHeight,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            width: ((constraints.maxWidth) / 2) - (doubleListMarginSpacing / 2),
-                            margin: EdgeInsets.only( // no margin if its the last item
-                              left: index == 0 ? 0 : doubleListMarginSpacing,
-                            ),
-                            color: Colors.purpleAccent,
-                            child: Center(child: Text(constraints.maxWidth.toString() + ':::' + widget.menuTabMenuItemsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
+                          return MenuCardItem(
+                            menuItem: widget.menuTabMenuItemsList[index],
+                            itemWidth: ((constraints.maxWidth) / 2) - (doubleListMarginSpacing / 2),
+                            itemLeftMargin: index == 0 ? 0 : doubleListMarginSpacing,
+                            press: () => (index) {
+
+                            },
+                            key: UniqueKey(),
                           );
                         },
                       ),
                     );
-
-                    // return Container(
-                    //   width: ((constraints.maxWidth) / 2) - (doubleListMarginSpacing / 2),
-                    //   margin: EdgeInsets.only( // no margin if its the last item
-                    //     left: index == 0 ? 0 : doubleListMarginSpacing,
-                    //   ),
-                    //   color: Colors.purpleAccent,
-                    //   child: Stack(
-                    //     fit: StackFit.expand,
-                    //     children: [
-                    //       Container(
-                    //         decoration: BoxDecoration(
-                    //           borderRadius: BorderRadius.circular(20),
-                    //           // image: DecorationImage(
-                    //           //   fit: BoxFit.fill,
-                    //           //   image: NetworkImage(
-                    //           //     'https://miro.medium.com/max/1400/1*-6WdIcd88w3pfphHOYln3Q.png',
-                    //           //   ),
-                    //           // ),
-                    //         ),
-                    //         color: Colors.purpleAccent,
-                    //         child: Padding(
-                    //           padding: const EdgeInsets.only(left: 12.0, top: 6.0, bottom: 2.0),
-                    //           child: Center(child: Text(constraints.maxWidth.toString() + ':::' + menuTabsList[index].name, style: TextStyle(fontSize: 14, color: Colors.black54),)),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // );
                   }
               ),
             ),
         ).toList()
-      ),
     );
   }
 }
