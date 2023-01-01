@@ -7,9 +7,11 @@ import '../../../utils/responsive.dart';
 import '../models/menu_list_index_changed.dart';
 import '../models/menu_tab_items.dart';
 import '../models/menu_tabs.dart';
+import 'menu_bar.dart';
 import 'menu_card_item.dart';
-import 'menu_section_tab_item.dart';
 import 'menu_tab_indicator_item.dart';
+
+typedef ParentOnMenuTabSelectedCallback = void Function(int selectedMenuTabIndex, bool isScroll, int selectedMenuId);
 
 class MenuSectionMenuLayout extends StatefulWidget {
   const MenuSectionMenuLayout({
@@ -26,10 +28,10 @@ class MenuSectionMenuLayout extends StatefulWidget {
   final List <MenuTabItems> menuTabMenuItemsList;
 
   @override
-  _MenuSectionMenuLayoutState createState() => _MenuSectionMenuLayoutState();
+  MenuSectionMenuLayoutState createState() => MenuSectionMenuLayoutState();
 }
 
-class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with SingleTickerProviderStateMixin {
+class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with SingleTickerProviderStateMixin {
 
   final PageController _pageController = PageController();
 
@@ -78,7 +80,12 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
 
   List <Widget> _buildMobileMenuWidgets(BuildContext context) {
     return [
-      _buildMenuBar(context),
+      MenuBar(
+        key: UniqueKey(),
+        activeMenuTabIndex: widget.activeMenuTabIndex,
+        menuTabsList: widget.menuTabsList,
+        parentOnMenuTabSelected: onMenuTabSelected,
+      ),
       const SizedBox(
         height: kDefaultPadding,
       ),
@@ -97,7 +104,12 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildMenuBar(context),
+            MenuBar(
+              key: UniqueKey(),
+              activeMenuTabIndex: widget.activeMenuTabIndex,
+              menuTabsList: widget.menuTabsList,
+              parentOnMenuTabSelected: onMenuTabSelected,
+            ),
             SizedBox(
               width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
             ),
@@ -116,63 +128,6 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
         child: _buildMenuPageViews(context),
       ),
     ];
-  }
-
-  Widget _buildMenuBar(BuildContext context) {
-    return Responsive.isMobile(context) ?
-      Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            kDefaultPadding
-          ),
-          color: kBgColor
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: widget.menuTabsList.map<MenuSectionTabItem>((item) =>
-              MenuSectionTabItem(
-                key: UniqueKey(),
-                name: item.name,
-                imagePath: item.imagePath,
-                onSelectedMenuTab: (){
-                  onMenuTabSelected(widget.menuTabsList.indexOf(item), true, item.id);
-                },
-                isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item),
-                borderRadius: BorderRadius.circular(
-                  kDefaultPadding * 1.15,
-                ),
-                menuPadding: const EdgeInsets.symmetric(
-                  vertical: kDefaultPadding * 0.5,
-                  horizontal: kDefaultPadding * 0.80,
-                ),
-              )
-          ).toList(),
-        ),
-      )
-        :
-      Expanded(
-          child: Column(
-            children: widget.menuTabsList.map<MenuSectionTabItem>((item) =>
-                MenuSectionTabItem(
-                    key: UniqueKey(),
-                    name: item.name,
-                    imagePath: item.imagePath,
-                    onSelectedMenuTab: (){
-                      onMenuTabSelected(widget.menuTabsList.indexOf(item), true, item.id);
-                    },
-                    isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item),
-                    borderRadius: BorderRadius.circular(
-                      kDefaultPadding * 0.60,
-                    ),
-                    menuPadding: const EdgeInsets.all(
-                        kDefaultPadding * 0.30
-                    ),
-                )
-            ).toList()
-          ),
-      );
   }
 
   Widget _buildMenuBarIndicator(BuildContext context) {
