@@ -19,14 +19,13 @@ class SubscribeButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(
-            horizontal: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding,
-            vertical: Responsive.isMobile(context) ? kDefaultPadding * 0.85 : kDefaultPadding,
+          padding: const EdgeInsets.all(
+              kDefaultPadding * 0.85
           ),
-          primary: Colors.red,
+          primary: kPrimaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-                kDefaultPadding,
+              Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 0.75,
             ),
           ),
         ),

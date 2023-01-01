@@ -72,7 +72,7 @@ class MenuCardItem extends StatelessWidget {
               children: [
                 RichTextTitle(
                   text: menuItem.name,
-                  fontSize: Responsive.isMobile(context) ? 13 : 15,
+                  fontSize: Responsive.isMobile(context) ? 14 : 16,
                   fontWeight: FontWeight.bold,
                   textColor: Colors.white,
                   alignStart: true,
@@ -82,14 +82,14 @@ class MenuCardItem extends StatelessWidget {
                   height: Responsive.isMobile(context) ? kDefaultPadding * 0.35 : kDefaultPadding * 0.50,
                 ),
                 RichTextTitle(
-                  text: menuItem.currency,
-                  fontSize: Responsive.isMobile(context) ? 10 : 12,
+                  text: menuItem.currency + " ",
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                   textColor: kPrimaryColor,
                   alignStart: true,
                   coloredText: menuItem.price,
                   coloredTextColor: Colors.white,
-                  coloredTextFontSize: Responsive.isMobile(context) ? 13 : 15,
+                  coloredTextFontSize: 18,
                   coloredTextFontWeight: FontWeight.bold,
                   textScaleFactor: 0.0,
                 ),
@@ -103,14 +103,14 @@ class MenuCardItem extends StatelessWidget {
                     children: [
                       RichTextTitle(
                         text: 'Order Now',
-                        fontSize: Responsive.isMobile(context) ? 13 : 15,
+                        fontSize: Responsive.isMobile(context) ? 14 : 16,
                         fontWeight: FontWeight.normal,
                         textColor: Colors.white,
                         alignStart: true,
                         textScaleFactor: 0.0,
                       ),
                       SizedBox(
-                        width: Responsive.isMobile(context) ? kDefaultPadding * 0.75 : kDefaultPadding * 0.50,
+                        width: Responsive.isMobile(context) ? kDefaultPadding : kDefaultPadding * 0.50,
                       ),
                       Icon(
                         Icons.arrow_forward_ios,

@@ -10,6 +10,7 @@ import '../models/menu_tabs.dart';
 import 'menu_bar.dart';
 import 'menu_card_item.dart';
 import 'menu_tab_indicator_item.dart';
+import 'more_menu_button.dart';
 
 typedef ParentOnMenuTabSelectedCallback = void Function(int selectedMenuTabIndex, bool isScroll, int selectedMenuId);
 
@@ -63,8 +64,8 @@ class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Singl
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minHeight: Responsive.isMobile(context) ? 275 : 240,
-        maxHeight: Responsive.isMobile(context) ? 300 : 260
+        minHeight: Responsive.isMobile(context) ? 350 : 260,
+        maxHeight: Responsive.isMobile(context) ? 400 : 260
       ),
       child: GestureDetector(
           onTap: () {
@@ -92,6 +93,10 @@ class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Singl
       Expanded(
         child: _buildMenuPageViews(context),
       ),
+      const SizedBox(
+        height: kDefaultPadding,
+      ),
+      const MoreMenuButton(),
     ];
   }
 

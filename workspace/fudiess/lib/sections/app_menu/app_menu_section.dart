@@ -107,8 +107,14 @@ class _AppMenuSectionState extends State<AppMenuSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: Responsive.isMobile(context) ? kDefaultPadding : kDefaultPadding * 1.5,
+            ),
             _buildMenuSectionHeaderLayout(context),
             _buildMenuSectionContentLayout(context),
+            SizedBox(
+              height: Responsive.isMobile(context) ? 0 : kDefaultPadding * 1.5,
+            ),
           ],
         ),
       ),

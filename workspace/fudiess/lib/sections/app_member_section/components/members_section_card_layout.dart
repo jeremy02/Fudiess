@@ -157,7 +157,7 @@ class MembersSectionCardLayout extends StatelessWidget {
           ),
           const SubscribeButton(),
           const SizedBox(
-            width: kDefaultPadding * 0.5,
+            width: kDefaultPadding * 0.25,
           )
         ],
       ),

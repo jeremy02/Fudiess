@@ -29,11 +29,7 @@ class MenuSectionTabItem extends StatelessWidget {
       child: Material(
         color: isActive ? kPrimaryColor : Colors.transparent,
         child: InkWell(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(
-              kDefaultPadding * 0.60,
-            ),
-          ),
+          borderRadius: borderRadius,
           onTap: () {
             onSelectedMenuTab();
           },
@@ -53,7 +49,7 @@ class MenuSectionTabItem extends StatelessWidget {
                   ClipOval(
                     child: Container(
                       padding: const EdgeInsets.all(
-                          kDefaultPadding * 0.20
+                          kDefaultPadding * 0.30
                       ),
                       color: isActive ? Colors.white : Colors.transparent,
                       child: CircleAvatar(
