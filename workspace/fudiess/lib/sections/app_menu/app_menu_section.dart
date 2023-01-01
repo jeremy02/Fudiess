@@ -36,8 +36,6 @@ class _AppMenuSectionState extends State<AppMenuSection> {
 
   // forward and back buttons active state
   int _menuTabMenuItemsListIndex = 0;
-  bool forwardButtonActive = false;
-  bool backButtonActive = false;
 
   @override
   void dispose() {
@@ -93,8 +91,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: AnimatedContainer(
-        constraints: BoxConstraints(
-          minHeight: Responsive.isMobile(context) ? 450 : 600,
+        constraints: const BoxConstraints(
           maxWidth: kMaxWidth,
         ),
         padding: EdgeInsets.symmetric(
@@ -111,21 +108,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildMenuSectionHeaderLayout(context),
-            NotificationListener<MenuListIndexChanged>(
-                child: MenuSectionMenuLayout(
-                  scrollController: _scrollController,
-                  activeMenuTabIndex: activeMenuTabIndex,
-                  menuTabsList: _menuTabsList,
-                  menuTabMenuItemsList: _menuTabMenuItemsList
-                ),
-                onNotification: (res) {
-                  setState(() {
-                    activeMenuTabIndex = res.selectedMenuTabIndex;
-                    _menuTabMenuItemsList = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == res.selectedMenuTabId).toList();
-                  });
-                  return true;
-                }
-            ),
+            _buildMenuSectionContentLayout(context),
           ],
         ),
       ),
@@ -210,6 +193,25 @@ class _AppMenuSectionState extends State<AppMenuSection> {
           height: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 0.8,
         ),
       ],
+    );
+  }
+
+  Widget _buildMenuSectionContentLayout(BuildContext context) {
+    return NotificationListener<MenuListIndexChanged>(
+        child: MenuSectionMenuLayout(
+            scrollController: _scrollController,
+            activeMenuTabIndex: activeMenuTabIndex,
+            menuTabsList: _menuTabsList,
+            menuTabMenuItemsList: _menuTabMenuItemsList
+        ),
+        onNotification: (res) {
+          setState(() {
+            activeMenuTabIndex = res.selectedMenuTabIndex;
+            _menuTabMenuItemsList = _menuTabItemsController.menuTabItems.where((i) => i.menuTabId == res.selectedMenuTabId).toList();
+            _menuTabMenuItemsListIndex = 0;
+          });
+          return true;
+        }
     );
   }
 }

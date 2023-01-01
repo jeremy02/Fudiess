@@ -72,8 +72,8 @@ class MenuCardItem extends StatelessWidget {
               children: [
                 RichTextTitle(
                   text: menuItem.name,
-                  fontSize: Responsive.isMobile(context) ? 12 : 14,
-                  fontWeight: FontWeight.normal,
+                  fontSize: Responsive.isMobile(context) ? 13 : 15,
+                  fontWeight: FontWeight.bold,
                   textColor: Colors.white,
                   alignStart: true,
                   textScaleFactor: 0.0,
@@ -84,13 +84,13 @@ class MenuCardItem extends StatelessWidget {
                 RichTextTitle(
                   text: menuItem.currency,
                   fontSize: Responsive.isMobile(context) ? 10 : 12,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.bold,
                   textColor: kPrimaryColor,
                   alignStart: true,
                   coloredText: menuItem.price,
                   coloredTextColor: Colors.white,
-                  coloredTextFontSize: Responsive.isMobile(context) ? 12 : 14,
-                  coloredTextFontWeight: FontWeight.normal,
+                  coloredTextFontSize: Responsive.isMobile(context) ? 13 : 15,
+                  coloredTextFontWeight: FontWeight.bold,
                   textScaleFactor: 0.0,
                 ),
                 SizedBox(
@@ -103,7 +103,7 @@ class MenuCardItem extends StatelessWidget {
                     children: [
                       RichTextTitle(
                         text: 'Order Now',
-                        fontSize: Responsive.isMobile(context) ? 12 : 14,
+                        fontSize: Responsive.isMobile(context) ? 13 : 15,
                         fontWeight: FontWeight.normal,
                         textColor: Colors.white,
                         alignStart: true,

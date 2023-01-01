@@ -49,5 +49,32 @@ class MenuTabItemsController extends GetxController {
       imagePath: "assets/images/menu_section/wild_salmon_burger.png",
       isPremium: true,
     ),
+    MenuTabItems(
+      id: 6,
+      menuTabId: 2,
+      name: "Napoletana Pizza",
+      price: "32",
+      currency: "\$",
+      imagePath: "assets/images/menu_section/napoletana_pizza.png",
+      isPremium: false,
+    ),
+    MenuTabItems(
+      id: 7,
+      menuTabId: 2,
+      name: "Pepperoni Pizza",
+      price: "41",
+      currency: "\$",
+      imagePath: "assets/images/menu_section/pepperoni_pizza.png",
+      isPremium: false,
+    ),
+    MenuTabItems(
+      id: 8,
+      menuTabId: 1,
+      name: "Turkey Burger",
+      price: "17",
+      currency: "\$",
+      imagePath: "assets/images/menu_section/turkey_burger.png",
+      isPremium: true,
+    ),
   ];
 }

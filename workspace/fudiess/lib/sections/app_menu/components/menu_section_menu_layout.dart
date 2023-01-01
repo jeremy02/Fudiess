@@ -60,64 +60,119 @@ class _MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Sing
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(
-        minHeight: 240,
-        maxHeight: 260
+      constraints: BoxConstraints(
+        minHeight: Responsive.isMobile(context) ? 275 : 240,
+        maxHeight: Responsive.isMobile(context) ? 300 : 260
       ),
       child: GestureDetector(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
         child: Flex(
-          direction: Axis.horizontal,
-          children: [
-            Flexible(
-                flex: 2,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _buildMenuBar(context),
-                    SizedBox(
-                      width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
-                    ),
-                    _buildMenuBarIndicator(context),
-                    SizedBox(
-                      width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
-                    ),
-                  ],
-                ),
-            ),
-            SizedBox(
-              width: Responsive.isTablet(context) ? 0 : kDefaultPadding * 2,
-            ),
-            Flexible(
-              flex: 3,
-              child: _buildMenuPageViews(context),
-            ),
-          ],
+          direction: Responsive.isMobile(context) ? Axis.vertical : Axis.horizontal,
+          children: Responsive.isMobile(context) ? _buildMobileMenuWidgets(context) : _buildDesktopTabletMenuWidgets(context),
         ),
       ),
     );
   }
 
+  List <Widget> _buildMobileMenuWidgets(BuildContext context) {
+    return [
+      _buildMenuBar(context),
+      const SizedBox(
+        height: kDefaultPadding,
+      ),
+      Expanded(
+        child: _buildMenuPageViews(context),
+      ),
+    ];
+  }
+
+  List <Widget> _buildDesktopTabletMenuWidgets(BuildContext context) {
+    return [
+      Flexible(
+        flex: 2,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildMenuBar(context),
+            SizedBox(
+              width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
+            ),
+            _buildMenuBarIndicator(context),
+            SizedBox(
+              width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
+            ),
+          ],
+        ),
+      ),
+      SizedBox(
+        width: Responsive.isTablet(context) ? 0 : kDefaultPadding * 2,
+      ),
+      Flexible(
+        flex: 3,
+        child: _buildMenuPageViews(context),
+      ),
+    ];
+  }
+
   Widget _buildMenuBar(BuildContext context) {
-    return Expanded(
-        child: Column(
+    return Responsive.isMobile(context) ?
+      Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            kDefaultPadding
+          ),
+          color: kBgColor
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: widget.menuTabsList.map<MenuSectionTabItem>((item) =>
               MenuSectionTabItem(
-                  key: UniqueKey(),
-                  name: item.name,
-                  imagePath: item.imagePath,
-                  onSelectedMenuTab: (){
-                    onMenuTabSelected(widget.menuTabsList.indexOf(item), true, item.id);
-                  },
-                  isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item)
+                key: UniqueKey(),
+                name: item.name,
+                imagePath: item.imagePath,
+                onSelectedMenuTab: (){
+                  onMenuTabSelected(widget.menuTabsList.indexOf(item), true, item.id);
+                },
+                isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item),
+                borderRadius: BorderRadius.circular(
+                  kDefaultPadding * 1.15,
+                ),
+                menuPadding: const EdgeInsets.symmetric(
+                  vertical: kDefaultPadding * 0.5,
+                  horizontal: kDefaultPadding * 0.80,
+                ),
               )
-          ).toList()
+          ).toList(),
         ),
-    );
+      )
+        :
+      Expanded(
+          child: Column(
+            children: widget.menuTabsList.map<MenuSectionTabItem>((item) =>
+                MenuSectionTabItem(
+                    key: UniqueKey(),
+                    name: item.name,
+                    imagePath: item.imagePath,
+                    onSelectedMenuTab: (){
+                      onMenuTabSelected(widget.menuTabsList.indexOf(item), true, item.id);
+                    },
+                    isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item),
+                    borderRadius: BorderRadius.circular(
+                      kDefaultPadding * 0.60,
+                    ),
+                    menuPadding: const EdgeInsets.all(
+                        kDefaultPadding * 0.30
+                    ),
+                )
+            ).toList()
+          ),
+      );
   }
 
   Widget _buildMenuBarIndicator(BuildContext context) {
