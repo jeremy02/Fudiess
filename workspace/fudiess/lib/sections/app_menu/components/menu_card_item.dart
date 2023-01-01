@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../components/rich_text_title.dart';
 import '../../../utils/constants.dart';
@@ -96,12 +97,7 @@ class MenuCardItem extends StatelessWidget {
                   height: Responsive.isMobile(context) ? kDefaultPadding * 0.35 : kDefaultPadding * 0.50,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    print("write your route");
-                  },
-                  onLongPress: (){
-                    // open dialog OR navigate OR do what you want
-                  },
+                  onTap: press,
                   child: Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
@@ -127,6 +123,19 @@ class MenuCardItem extends StatelessWidget {
               ],
             ),
           ),
+          menuItem.isPremium ? Positioned(
+            top: kDefaultPadding * 0.75,
+            right: kDefaultPadding * 0.75,
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              radius: kDefaultPadding * 0.5,
+              child: SvgPicture.asset(
+                "assets/images/menu_section/ic_menu_premium.svg",
+                alignment: Alignment.centerLeft,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ) : Container(),
         ],
       ),
     );

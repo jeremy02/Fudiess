@@ -11,6 +11,7 @@ class MenuTabItemsController extends GetxController {
       price: "12",
       currency: "\$",
       imagePath: "assets/images/menu_section/cheese_burger.png",
+      isPremium: false,
     ),
     MenuTabItems(
       id: 2,
@@ -19,6 +20,7 @@ class MenuTabItemsController extends GetxController {
       price: "30",
       currency: "\$",
       imagePath: "assets/images/menu_section/cheese_truffle_burger.png",
+      isPremium: true,
     ),
     MenuTabItems(
       id: 3,
@@ -27,6 +29,7 @@ class MenuTabItemsController extends GetxController {
       price: "40",
       currency: "\$",
       imagePath: "assets/images/menu_section/hawaiian_pizza.png",
+      isPremium: true,
     ),
     MenuTabItems(
       id: 4,
@@ -35,6 +38,7 @@ class MenuTabItemsController extends GetxController {
       price: "27",
       currency: "\$",
       imagePath: "assets/images/menu_section/portobello_mushroom_burger.png",
+      isPremium: false,
     ),
     MenuTabItems(
       id: 5,
@@ -43,6 +47,7 @@ class MenuTabItemsController extends GetxController {
       price: "25",
       currency: "\$",
       imagePath: "assets/images/menu_section/wild_salmon_burger.png",
+      isPremium: true,
     ),
   ];
 }
