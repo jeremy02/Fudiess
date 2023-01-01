@@ -52,7 +52,7 @@ class MenuCardItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     gradient: LinearGradient(
                       begin: Alignment.bottomRight,
-                      stops: const [0.1, 0.9],
+                      stops: const [0.1, 1.9],
                       colors: [
                         Colors.black.withOpacity(.8),
                         Colors.black.withOpacity(.1)

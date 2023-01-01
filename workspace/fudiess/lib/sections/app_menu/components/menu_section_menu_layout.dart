@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/utils/constants.dart';
 
-import '../../../components/custom_scroll_behavior.dart';
 import '../../../components/list_scroll_to_index.dart';
 import '../../../utils/responsive.dart';
 import '../models/menu_list_index_changed.dart';
 import '../models/menu_tab_items.dart';
 import '../models/menu_tabs.dart';
 import 'menu_bar.dart';
-import 'menu_card_item.dart';
-import 'menu_tab_indicator_item.dart';
+import 'menu_bar_indicator.dart';
+import 'menu_page_views.dart';
 import 'more_menu_button.dart';
 
 typedef ParentOnMenuTabSelectedCallback = void Function(int selectedMenuTabIndex, bool isScroll, int selectedMenuId);
@@ -91,7 +90,14 @@ class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Singl
         height: kDefaultPadding,
       ),
       Expanded(
-        child: _buildMenuPageViews(context),
+        child: MenuPageViews(
+          scrollController: widget.scrollController,
+          pageController: _pageController,
+          activeMenuTabIndex: widget.activeMenuTabIndex,
+          menuTabsList: widget.menuTabsList,
+          menuTabMenuItemsList: widget.menuTabMenuItemsList,
+          parentOnMenuTabSelected: onMenuTabSelected,
+        ),
       ),
       const SizedBox(
         height: kDefaultPadding,
@@ -118,7 +124,11 @@ class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Singl
             SizedBox(
               width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
             ),
-            _buildMenuBarIndicator(context),
+            MenuBarIndicator(
+              key: UniqueKey(),
+              activeMenuTabIndex: widget.activeMenuTabIndex,
+              menuTabsList: widget.menuTabsList,
+            ),
             SizedBox(
               width: Responsive.isTablet(context) ? kDefaultPadding : kDefaultPadding * 2,
             ),
@@ -130,71 +140,15 @@ class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Singl
       ),
       Flexible(
         flex: 3,
-        child: _buildMenuPageViews(context),
-      ),
-    ];
-  }
-
-  Widget _buildMenuBarIndicator(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(
-        kDefaultPadding,
-      ),
-      child: Container(
-        width: kDefaultPadding * 0.30,
-        color: kBgColor,
-        child: Column(
-            children: widget.menuTabsList.map<MenuTabIndicatorItem>((item) =>
-                MenuTabIndicatorItem(
-                    key: UniqueKey(),
-                    isActive: widget.activeMenuTabIndex == widget.menuTabsList.indexOf(item)
-                )
-            ).toList()
+        child: MenuPageViews(
+          scrollController: widget.scrollController,
+          pageController: _pageController,
+          activeMenuTabIndex: widget.activeMenuTabIndex,
+          menuTabsList: widget.menuTabsList,
+          menuTabMenuItemsList: widget.menuTabMenuItemsList,
+          parentOnMenuTabSelected: onMenuTabSelected,
         ),
       ),
-    );
-  }
-
-  Widget _buildMenuPageViews(BuildContext context) {
-    final doubleListMarginSpacing = (Responsive.isDesktop(context) ? kDefaultPadding * 1.75 : kDefaultPadding * 0.70);
-
-    return PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        onPageChanged: (int menuSelectedIndex) {
-          onMenuTabSelected(menuSelectedIndex, false, widget.menuTabsList[menuSelectedIndex].id);
-        },
-        children: widget.menuTabsList.map<ConstrainedBox>((item) =>
-            ConstrainedBox(
-              constraints: const BoxConstraints.expand(),
-              child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return ScrollConfiguration(
-                      behavior: CustomScrollBehavior(),
-                      child: ListScrollToIndex(
-                        controller: widget.scrollController,
-                        scrollDirection: Axis.horizontal,
-                        itemHorizontalMargin: doubleListMarginSpacing,
-                        itemCount: widget.menuTabMenuItemsList.length,
-                        itemWidth: constraints.maxWidth,
-                        itemHeight: constraints.maxHeight,
-                        itemBuilder: (BuildContext context, int index) {
-                          return MenuCardItem(
-                            menuItem: widget.menuTabMenuItemsList[index],
-                            itemWidth: ((constraints.maxWidth) / 2) - (doubleListMarginSpacing / 2),
-                            itemLeftMargin: index == 0 ? 0 : doubleListMarginSpacing,
-                            press: () => (index) {
-
-                            },
-                            key: UniqueKey(),
-                          );
-                        },
-                      ),
-                    );
-                  }
-              ),
-            ),
-        ).toList()
-    );
+    ];
   }
 }
