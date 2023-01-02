@@ -49,7 +49,7 @@ class MenuCardItem extends StatelessWidget {
               onTap: press,
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(kDefaultPadding * 0.5),
                     gradient: LinearGradient(
                       begin: Alignment.bottomRight,
                       stops: const [0.1, 1.9],

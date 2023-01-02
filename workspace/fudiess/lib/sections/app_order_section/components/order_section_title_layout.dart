@@ -18,7 +18,7 @@ class OrderSectionTitleLayout extends StatelessWidget {
       children: [
         RichTextTitle(
           text: "Order ",
-          fontSize: Responsive.isMobile(context) ? 22 : 30,
+          fontSize: Responsive.isMobile(context) ? 30 : 40,
           fontWeight: FontWeight.bold,
           textColor: kPrimaryColor,
           alignStart: false,

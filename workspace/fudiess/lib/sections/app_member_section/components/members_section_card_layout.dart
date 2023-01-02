@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fudiess/sections/app_member_section/components/subscribe_button.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 
+import '../../../components/default_button.dart';
 import '../../../components/rich_text_title.dart';
 
 class MembersSectionCardLayout extends StatelessWidget {
@@ -45,28 +45,28 @@ class MembersSectionCardLayout extends StatelessWidget {
               text: TextSpan(
                 text: 'Become a ',
                 style: TextStyle(
-                    fontSize: Responsive.isMobile(context) ? 24 : 40,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2
+                  fontSize: Responsive.isMobile(context) ? 30 : 40,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
                 ),
                 children: [
                   TextSpan(
                     text: 'member',
                     style: TextStyle(
-                      fontSize: Responsive.isMobile(context) ? 24 : 40,
+                      fontSize: Responsive.isMobile(context) ? 30 : 40,
                       color: kPrimaryColor,
                       fontWeight: FontWeight.bold,
-                      height: 1.2,
+                      height: 1.5,
                     ),
                   ),
                   TextSpan(
                     text: ' and get',
                     style: TextStyle(
-                      fontSize: Responsive.isMobile(context) ? 24 : 40,
+                      fontSize: Responsive.isMobile(context) ? 30 : 40,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      height: 1.2,
+                      height: 1.5,
                     ),
                   ),
                 ],
@@ -155,7 +155,28 @@ class MembersSectionCardLayout extends StatelessWidget {
               ),
             ),
           ),
-          const SubscribeButton(),
+          Container(
+            decoration: const BoxDecoration(
+              color: kBackgroundColor,
+            ),
+            margin: const EdgeInsets.fromLTRB(
+                kDefaultPadding * 0.25, kDefaultPadding * 0.25, 0, kDefaultPadding * 0.25
+            ),
+            child: DefaultButton(
+              buttonText: "Subscribe Now",
+              fontSize: 14.0,
+              buttonPadding: const EdgeInsets.all(
+                  kDefaultPadding * 0.85
+              ),
+              fontWeight: FontWeight.normal,
+              buttonPress: () => {},
+              buttonBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 0.75,
+                ),
+              ),
+            ),
+          ),
           const SizedBox(
             width: kDefaultPadding * 0.25,
           )

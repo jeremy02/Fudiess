@@ -4,18 +4,22 @@ import '../utils/constants.dart';
 
 class DefaultButton extends StatelessWidget {
   final String buttonText;
-  final double horizontalPadding;
+  final EdgeInsets buttonPadding;
   final double fontSize;
   final FontWeight fontWeight;
   final VoidCallback buttonPress;
+  final double? buttonWidth;
+  final RoundedRectangleBorder? buttonBorder;
 
   const DefaultButton({
     Key? key,
     required this.buttonText,
-    required this.horizontalPadding,
+    required this.buttonPadding,
     required this.fontSize,
     required this.buttonPress,
     required this.fontWeight,
+    this.buttonWidth,
+    this.buttonBorder,
   }) : super(key: key);
 
   @override
@@ -29,31 +33,30 @@ class DefaultButton extends StatelessWidget {
           kPrimaryColor,
         ),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          EdgeInsets.symmetric(
-            horizontal: horizontalPadding,
-            vertical: kDefaultPadding,
-          ),
+          buttonPadding
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
+          buttonBorder ?? RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               kDefaultPadding * 0.60,
-            ),
-            side: const BorderSide(
-              color: Colors.transparent,
             ),
           ),
         ),
       ),
-      child: Text(
-        buttonText,
-        softWrap: true,
-        maxLines: 1,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          color: Colors.white,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minWidth: buttonWidth ?? 0
+        ),
+        child: Text(
+          buttonText,
+          softWrap: true,
+          maxLines: 1,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: fontWeight,
+            color: Colors.white,
+          ),
         ),
       ),
       onPressed: buttonPress,

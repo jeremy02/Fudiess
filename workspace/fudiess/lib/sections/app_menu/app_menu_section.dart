@@ -132,7 +132,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
           children: [
             RichTextTitle(
               text: "Menu ",
-              fontSize: Responsive.isMobile(context) ? 22 : 30,
+              fontSize: Responsive.isMobile(context) ? 30 : 40,
               fontWeight: FontWeight.bold,
               textColor: kPrimaryColor,
               alignStart: true,
@@ -188,7 +188,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
           const RichTextTitle(
             text: "Our menu which is popular lately.",
             fontSize: 12,
-            fontWeight: FontWeight.normal,
+            fontWeight: FontWeight.bold,
             textColor: kTextSecondaryColor,
             alignStart: true,
             coloredText: null,

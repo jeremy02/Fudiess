@@ -31,9 +31,10 @@ class TopSectionDiscountTextButton extends StatelessWidget {
             DefaultButton(
               buttonText: "New Menu",
               fontSize: 14.0,
-              horizontalPadding: Responsive.isDesktop(context)
-                  ? kDefaultPadding * 1.5
-                  : kDefaultPadding,
+              buttonPadding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context) ? kDefaultPadding * 1.5 : kDefaultPadding,
+                vertical: kDefaultPadding,
+              ),
               fontWeight: FontWeight.normal,
               buttonPress: () => {},
             ),
