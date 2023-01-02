@@ -6,6 +6,7 @@ import 'package:fudiess/sections/app_footer/app_footer_section.dart';
 import 'package:fudiess/sections/app_member_section/app_members_section.dart';
 import 'package:fudiess/sections/app_menu/app_menu_section.dart';
 import 'package:fudiess/sections/app_order_section/app_order_section.dart';
+import 'package:fudiess/sections/app_testimonials/app_testimonials_section.dart';
 import 'package:fudiess/sections/app_top_section/app_top_section.dart';
 import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
@@ -45,6 +46,7 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding * 0.5,
                     ),
                     AppMenuSection(screenSize: screenSize),
+                    AppTestimonialsSection(screenSize: screenSize),
                     const SizedBox(
                       height: kDefaultPadding,
                     ),
@@ -74,6 +76,7 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding * 0.5,
                     ),
                     AppMenuSection(screenSize: screenSize),
+                    AppTestimonialsSection(screenSize: screenSize),
                     const SizedBox(
                       height: kDefaultPadding,
                     ),
@@ -105,9 +108,7 @@ class HomeScreen extends StatelessWidget {
                       height: kDefaultPadding * 0.5,
                     ),
                     AppMenuSection(screenSize: screenSize),
-                    const SizedBox(
-                      height: kDefaultPadding,
-                    ),
+                    AppTestimonialsSection(screenSize: screenSize),
                     AppFAQsSection(screenSize: screenSize),
                     const SizedBox(
                       height: kDefaultPadding * 2,

@@ -107,13 +107,13 @@ class _AppMenuSectionState extends State<AppMenuSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: Responsive.isMobile(context) ? kDefaultPadding : kDefaultPadding * 1.5,
+            const SizedBox(
+              height: kDefaultPadding,
             ),
             _buildMenuSectionHeaderLayout(context),
             _buildMenuSectionContentLayout(context),
             SizedBox(
-              height: Responsive.isMobile(context) ? 0 : kDefaultPadding * 1.5,
+              height: Responsive.isMobile(context) ? 0 : kDefaultPadding * 3,
             ),
           ],
         ),
@@ -164,14 +164,14 @@ class _AppMenuSectionState extends State<AppMenuSection> {
                   width: kDefaultPadding,
                 ),
                 ForwardBackButton(
-                    bgColor: _menuTabMenuItemsListIndex + 1 <= (_menuTabMenuItemsList.length - 1) ? kPrimaryColor : Colors.white,
+                    bgColor: _menuTabMenuItemsListIndex + 2 <= (_menuTabMenuItemsList.length - 1) ? kPrimaryColor : Colors.white,
                     padding: kDefaultPadding * 0.70,
                     radius: kDefaultPadding*0.75,
                     elevation: 2.0,
                     icon: Icon(
                       Icons.arrow_forward_ios_sharp,
                       size: 22,
-                      color: _menuTabMenuItemsListIndex + 1 <= (_menuTabMenuItemsList.length - 1) ? Colors.white : kDarkBlackColor,
+                      color: _menuTabMenuItemsListIndex + 2 <= (_menuTabMenuItemsList.length - 1) ? Colors.white : kDarkBlackColor,
                     ),
                     buttonPress: () {
                       menuTabMenuItemsListScrollToIndex(true);

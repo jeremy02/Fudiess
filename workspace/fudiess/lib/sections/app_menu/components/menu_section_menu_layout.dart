@@ -112,7 +112,7 @@ class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Singl
         flex: 2,
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             MenuBar(
