@@ -28,11 +28,6 @@ Web and iPad Preview           |      Mobile UI Preview
 :-------------------------:|:-------------------------:
 ![](screenshots/ipad_version.png)  |  ![](screenshots/mobile_version.png)
 
-#### The App UI Mockups
-
-Mobile Mockup Preview           |      Ipad Mockup Preview           |      Web Mockup Preview
-:-------------------------:|:-------------------------:|:-------------------------:
-![](screenshots/mobile_mockup.png)  |  ![](screenshots/ipad_mockup.png)  |  ![](screenshots/web_mockup.png)
 
 #### Full Mockup UI Previews
 Mobile Mockup Preview           |
