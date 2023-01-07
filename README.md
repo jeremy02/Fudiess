@@ -64,11 +64,21 @@ Web Mockup Preview           |
 ![](screenshots/web_mockup.png)
 
 </div>
-
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><img src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" style="width: 33%; height: 60%" alt=""/><br /><sub><b>Mobile Mockup Preview</b></sub><br /><a href="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" title="Mobile Mockup Preview ">🐛</a></td>
+    <td align="center"><img src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" style="width: 33%; height: 60%" alt=""/><br /><sub><b>Mobile Mockup Preview</b></sub><br /><a href="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" title="Mobile Mockup Preview ">🐛</a></td>
+    <td align="center"><img src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" style="width: 33%; height: 60%" alt=""/><br /><sub><b>Mobile Mockup Preview</b></sub><br /><a href="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" title="Mobile Mockup Preview ">🐛</a></td>
+  </tr>
+</table>
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
 ## Notes
 Done
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+## Contribution
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
