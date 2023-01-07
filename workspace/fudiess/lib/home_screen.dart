@@ -48,6 +48,9 @@ class HomeScreen extends StatelessWidget {
                     AppMenuSection(screenSize: screenSize),
                     AppTestimonialsSection(screenSize: screenSize),
                     AppArticlesSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: 40,
+                    ),
                     AppFAQsSection(screenSize: screenSize),
                     const SizedBox(
                       height: 20,
@@ -76,6 +79,9 @@ class HomeScreen extends StatelessWidget {
                     AppMenuSection(screenSize: screenSize),
                     AppTestimonialsSection(screenSize: screenSize),
                     AppArticlesSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: 40,
+                    ),
                     AppFAQsSection(screenSize: screenSize),
                     const SizedBox(
                       height: 20,
@@ -106,6 +112,9 @@ class HomeScreen extends StatelessWidget {
                     AppMenuSection(screenSize: screenSize),
                     AppTestimonialsSection(screenSize: screenSize),
                     AppArticlesSection(screenSize: screenSize),
+                    const SizedBox(
+                      height: 40,
+                    ),
                     AppFAQsSection(screenSize: screenSize),
                     const SizedBox(
                       height: 20,

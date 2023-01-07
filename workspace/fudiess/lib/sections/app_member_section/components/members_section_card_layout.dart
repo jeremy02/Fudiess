@@ -14,7 +14,7 @@ class MembersSectionCardLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      elevation: 1.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
           15,

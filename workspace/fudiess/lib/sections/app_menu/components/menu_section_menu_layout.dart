@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fudiess/utils/constants.dart';
 
 import '../../../components/list_scroll_to_index.dart';
+import '../../../components/view_more_button.dart';
 import '../../../utils/responsive.dart';
 import '../models/menu_list_index_changed.dart';
 import '../models/menu_tab_items.dart';
@@ -9,7 +10,6 @@ import '../models/menu_tabs.dart';
 import 'menu_bar.dart';
 import 'menu_bar_indicator.dart';
 import 'menu_page_views.dart';
-import 'more_menu_button.dart';
 
 typedef ParentOnMenuTabSelectedCallback = void Function(int selectedMenuTabIndex, bool isScroll, int selectedMenuId);
 
@@ -102,7 +102,9 @@ class MenuSectionMenuLayoutState extends State<MenuSectionMenuLayout> with Singl
       const SizedBox(
         height: kDefaultPadding,
       ),
-      const MoreMenuButton(),
+      const ViewMoreMenuButton(
+        buttonText: 'More Menu',
+      ),
     ];
   }
 

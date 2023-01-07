@@ -4,6 +4,7 @@ import 'package:fudiess/utils/responsive.dart';
 
 import '../../components/default_button.dart';
 import '../../components/rich_text_title.dart';
+import '../../components/view_more_button.dart';
 
 class AppArticlesSection extends StatelessWidget {
   const AppArticlesSection({
@@ -32,17 +33,20 @@ class AppArticlesSection extends StatelessWidget {
         ),
         // Provide an optional curve to make the animation feel smoother.
         curve: Curves.fastOutSlowIn,
-        child: Container(
-          color: Colors.black12,
-          child: Flex(
-            direction: Axis.vertical,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildArticlesTitleLayoutSection(context),
-              _buildArticlesContentMobileLayoutSection(context),
-            ],
-          ),
-        )
+        child: Flex(
+          direction: Axis.vertical,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            _buildArticlesTitleLayoutSection(context),
+            _buildArticlesContentMobileLayoutSection(context),
+            SizedBox(
+              height: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 3,
+            ),
+            const ViewMoreMenuButton(
+              buttonText: 'More Articles',
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -62,10 +66,14 @@ class AppArticlesSection extends StatelessWidget {
           Expanded(
             child: _buildArticlesCardSection(context),
           ),
-        SizedBox(
-          width: Responsive.isMobile(context) ? 0 : doubleListMarginSpacing,
-          height: Responsive.isMobile(context) ? doubleListMarginSpacing : 0,
-        ),
+        if(Responsive.isMobile(context))
+          const SizedBox(
+            height: kDefaultPadding,
+          )
+        else
+          SizedBox(
+            width: doubleListMarginSpacing,
+          ),
         if(Responsive.isMobile(context))
           _buildArticlesCardSection(context)
         else
@@ -85,7 +93,7 @@ class AppArticlesSection extends StatelessWidget {
     }
 
     return Card(
-      elevation: 3.0,
+      elevation: 2.0,
       color: Colors.white,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shape: RoundedRectangleBorder(
@@ -188,6 +196,7 @@ class AppArticlesSection extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                     buttonPress: () => {},
                     buttonWidth: double.infinity,
+                    isOutlined: true,
                   ),
                 ]
               ),

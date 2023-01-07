@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fudiess/utils/responsive.dart';
 
 import '../../../components/rich_text_title.dart';
 import '../../../utils/constants.dart';
@@ -77,7 +78,7 @@ class ExpandableFaqsListSection extends StatelessWidget {
                   ),
                   child: RichTextTitle(
                     text: faqItem.title,
-                    fontSize: 20,
+                    fontSize: Responsive.isMobile(context) ? 14 : 16,
                     fontWeight: FontWeight.normal,
                     textColor: Colors.black,
                     alignStart: true,

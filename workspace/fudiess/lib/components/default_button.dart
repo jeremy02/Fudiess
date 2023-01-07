@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
@@ -10,6 +11,7 @@ class DefaultButton extends StatelessWidget {
   final VoidCallback buttonPress;
   final double? buttonWidth;
   final RoundedRectangleBorder? buttonBorder;
+  final bool? isOutlined;
 
   const DefaultButton({
     Key? key,
@@ -20,6 +22,7 @@ class DefaultButton extends StatelessWidget {
     required this.fontWeight,
     this.buttonWidth,
     this.buttonBorder,
+    this.isOutlined,
   }) : super(key: key);
 
   @override
@@ -27,10 +30,10 @@ class DefaultButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all<Color>(
-          Colors.white,
+          isOutlined == true ? Colors.black12 : Colors.white,
         ),
         backgroundColor: MaterialStateProperty.all<Color>(
-          kPrimaryColor,
+          isOutlined == true ? Colors.white : kPrimaryColor,
         ),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
           buttonPadding
@@ -41,6 +44,19 @@ class DefaultButton extends StatelessWidget {
               kDefaultPadding * 0.60,
             ),
           ),
+        ),
+        side: MaterialStateProperty.all<BorderSide>(
+          BorderSide(
+            width: isOutlined == true ? 1 : 0,
+            color: kPrimaryColor,
+          ),
+        ),
+        overlayColor: MaterialStateProperty.resolveWith(
+              (states) {
+            return states.contains(MaterialState.pressed)
+                ? isOutlined == true ? Colors.black12 : null
+                : null;
+          },
         ),
       ),
       child: ConstrainedBox(
@@ -55,7 +71,7 @@ class DefaultButton extends StatelessWidget {
           style: TextStyle(
             fontSize: fontSize,
             fontWeight: fontWeight,
-            color: Colors.white,
+            color: isOutlined == true ? kPrimaryColor : Colors.white,
           ),
         ),
       ),

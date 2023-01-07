@@ -31,7 +31,7 @@ class TestimonialCardItem extends StatelessWidget {
           child: Material(
             borderRadius: borderRadius,
             color: Colors.white,
-            elevation: 2.0,
+            elevation: 0.0,
             child: InkWell(
               hoverColor: Colors.black12,
               borderRadius: borderRadius,

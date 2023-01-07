@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fudiess/utils/constants.dart';
+import 'package:fudiess/utils/responsive.dart';
 
-class MoreMenuButton extends StatelessWidget {
-  const MoreMenuButton({
+class ViewMoreMenuButton extends StatelessWidget {
+  const ViewMoreMenuButton({
     Key? key,
+    required this.buttonText
   }) : super(key: key);
+
+  final String buttonText;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class MoreMenuButton extends StatelessWidget {
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
-                    kDefaultPadding * 0.75,
+                    kDefaultPadding * 0.5,
                   ),
                 ),
               ),
@@ -38,26 +42,26 @@ class MoreMenuButton extends StatelessWidget {
               ),
             ),
             child: SizedBox(
-              width: constraints.maxWidth * 0.5,
+              width: Responsive.isMobile(context) ? constraints.maxWidth * 0.5 : constraints.maxWidth * 0.3,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
-                    'More Menu',
+                    buttonText,
                     softWrap: true,
                     maxLines: 1,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.normal,
                       color: kPrimaryColor,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: kDefaultPadding * 0.5,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.arrow_forward,
                     size: kDefaultPadding,
                     color: kPrimaryColor,
