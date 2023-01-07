@@ -22,14 +22,14 @@ The mobile or web app was created to simulate all the system behind the UI kit i
 * Landscape
 * Portrait
 
-### Fudiess - Food delivery Mobile & Tablet Responsive Final UI
+## Fudiess - Food delivery Mobile & Tablet Responsive Final UI
 
 Web and iPad Preview           |      Mobile UI Preview
 :-------------------------:|:-------------------------:
 ![](screenshots/ipad_version.png)  |  ![](screenshots/mobile_version.png)
 
 
-#### Full Mockup UI Previews
+## Full Mockup UI Previews
 Mobile Mockup Preview           |
 :-------------------------:
 
