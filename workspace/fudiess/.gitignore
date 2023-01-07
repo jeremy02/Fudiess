@@ -49,6 +49,12 @@
 !windows/
 windows/*
 ./windows/*
+./windows/*
+./windows/
+.windows/*
+.windows/
+/windows/*
+/windows/
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -114,6 +120,13 @@ captures/
 .idea/modules.xml
 # Comment next line if keeping position of elements in Navigation Editor is relevant for you
 .idea/navEditor.xml
+
+./workspace/*
+./workspace/
+.workspace/*
+.workspace/
+/workspace/*
+/workspace/
 
 pubspec.lock
 

@@ -17,12 +17,12 @@ class MembersSectionCardLayout extends StatelessWidget {
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
-          kDefaultPadding * 0.75,
+          15,
         ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(
-          kDefaultPadding,
+          20,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -37,7 +37,7 @@ class MembersSectionCardLayout extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             SizedBox(
-              height: Responsive.isMobile(context) ? kDefaultPadding : kDefaultPadding * 2,
+              height: Responsive.isMobile(context) ? 20 : 40,
             ),
             RichText(
               textAlign: TextAlign.center,
@@ -81,12 +81,12 @@ class MembersSectionCardLayout extends StatelessWidget {
               textScaleFactor: 1.2,
             ),
             const SizedBox(
-              height: kDefaultPadding,
+              height: 20,
             ),
             _buildSubscribeTextAndButtonLayout(context),
             SizedBox(
               width: double.infinity,
-              height: Responsive.isMobile(context) ? kDefaultPadding : kDefaultPadding * 2,
+              height: Responsive.isMobile(context) ? 20 : 40,
             ),
           ],
         ),
@@ -97,19 +97,6 @@ class MembersSectionCardLayout extends StatelessWidget {
   Widget _buildSubscribeTextAndButtonLayout(BuildContext context) {
 
     var screenSize = MediaQuery.of(context).size;
-
-    TextEditingController _textController = TextEditingController();
-
-    const border = OutlineInputBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(kDefaultPadding * 0.5),
-        bottomLeft: Radius.circular(kDefaultPadding * 0.5),
-      ),
-      borderSide: BorderSide(
-        width: 0,
-        color: kBackgroundColor,
-      ),
-    );
 
     return Container(
       width: Responsive.isMobile(context) ? double.infinity : screenSize.width * 0.60,
@@ -131,56 +118,77 @@ class MembersSectionCardLayout extends StatelessWidget {
             width: kDefaultPadding * 0.25,
           ),
           Expanded(
-            child: TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(
-                  Responsive.isMobile(context) ? kDefaultPadding * 0.25 : kDefaultPadding,
-                ),
-                filled: true,
-                fillColor: kBackgroundColor,
-                focusColor: kBackgroundColor,
-                hintText: 'joshua@gmail.com',
-                labelStyle: const TextStyle(
-                  color: kTextColor,
-                  fontSize: 14.0,
-                ),
-                hintStyle: const TextStyle(
-                  color: kTextSecondaryColor,
-                  fontSize: 14.0,
-                ),
-                border: InputBorder.none,
-                enabledBorder: border,
-                focusedBorder: border,
-              ),
-            ),
+            child: _buildSubscribeTextField(context),
           ),
-          Container(
-            decoration: const BoxDecoration(
-              color: kBackgroundColor,
-            ),
-            margin: const EdgeInsets.fromLTRB(
-                kDefaultPadding * 0.25, kDefaultPadding * 0.25, 0, kDefaultPadding * 0.25
-            ),
-            child: DefaultButton(
-              buttonText: "Subscribe Now",
-              fontSize: 14.0,
-              buttonPadding: const EdgeInsets.all(
-                  kDefaultPadding * 0.85
-              ),
-              fontWeight: FontWeight.normal,
-              buttonPress: () => {},
-              buttonBorder: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 0.75,
-                ),
-              ),
-            ),
-          ),
+          _buildSubscribeButton(context),
           const SizedBox(
             width: kDefaultPadding * 0.25,
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildSubscribeTextField(BuildContext context) {
+    TextEditingController _textController = TextEditingController();
+
+    const border = OutlineInputBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(kDefaultPadding * 0.5),
+        bottomLeft: Radius.circular(kDefaultPadding * 0.5),
+      ),
+      borderSide: BorderSide(
+        width: 0,
+        color: kBackgroundColor,
+      ),
+    );
+
+    return TextField(
+      controller: _textController,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(
+          Responsive.isMobile(context) ? kDefaultPadding * 0.25 : kDefaultPadding,
+        ),
+        filled: true,
+        fillColor: kBackgroundColor,
+        focusColor: kBackgroundColor,
+        hintText: 'joshua@gmail.com',
+        labelStyle: const TextStyle(
+          color: kTextColor,
+          fontSize: 14.0,
+        ),
+        hintStyle: const TextStyle(
+          color: kTextSecondaryColor,
+          fontSize: 14.0,
+        ),
+        border: InputBorder.none,
+        enabledBorder: border,
+        focusedBorder: border,
+      ),
+    );
+  }
+
+  Widget _buildSubscribeButton(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: kBackgroundColor,
+      ),
+      margin: const EdgeInsets.fromLTRB(
+          kDefaultPadding * 0.25, kDefaultPadding * 0.25, 0, kDefaultPadding * 0.25
+      ),
+      child: DefaultButton(
+        buttonText: "Subscribe Now",
+        fontSize: 14.0,
+        buttonPadding: const EdgeInsets.all(
+            kDefaultPadding * 0.85
+        ),
+        fontWeight: FontWeight.normal,
+        buttonPress: () => {},
+        buttonBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 0.75,
+          ),
+        ),
       ),
     );
   }

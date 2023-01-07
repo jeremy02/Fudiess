@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fudiess/controllers/menu_controller.dart';
+import 'package:fudiess/sections/app_articles/app_articles_section.dart';
 import 'package:fudiess/sections/app_bar/components/drawer_menu.dart';
 import 'package:fudiess/sections/app_faqs/app_faqs_section.dart';
 import 'package:fudiess/sections/app_footer/app_footer_section.dart';
@@ -8,7 +9,6 @@ import 'package:fudiess/sections/app_menu/app_menu_section.dart';
 import 'package:fudiess/sections/app_order_section/app_order_section.dart';
 import 'package:fudiess/sections/app_testimonials/app_testimonials_section.dart';
 import 'package:fudiess/sections/app_top_section/app_top_section.dart';
-import 'package:fudiess/utils/constants.dart';
 import 'package:fudiess/utils/responsive.dart';
 import 'package:get/get.dart';
 
@@ -39,24 +39,22 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     AppTopSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 0.5,
+                      height: 10,
                     ),
                     AppOrderSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 0.5,
+                      height: 10,
                     ),
                     AppMenuSection(screenSize: screenSize),
                     AppTestimonialsSection(screenSize: screenSize),
-                    const SizedBox(
-                      height: kDefaultPadding,
-                    ),
+                    AppArticlesSection(screenSize: screenSize),
                     AppFAQsSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 2,
+                      height: 20,
                     ),
                     AppMemberSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 2,
+                      height: 20,
                     ),
                     AppFooterSection(screenSize: screenSize),
                   ],
@@ -69,20 +67,18 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     AppTopSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 0.5,
+                      height: 10,
                     ),
                     AppOrderSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 0.5,
+                      height: 10,
                     ),
                     AppMenuSection(screenSize: screenSize),
                     AppTestimonialsSection(screenSize: screenSize),
-                    const SizedBox(
-                      height: kDefaultPadding,
-                    ),
+                    AppArticlesSection(screenSize: screenSize),
                     AppFAQsSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 2,
+                      height: 20,
                     ),
                     AppMemberSection(screenSize: screenSize),
                     const SizedBox(
@@ -101,17 +97,18 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     AppTopSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 0.5,
+                      height: 10,
                     ),
                     AppOrderSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 0.5,
+                      height: 10,
                     ),
                     AppMenuSection(screenSize: screenSize),
                     AppTestimonialsSection(screenSize: screenSize),
+                    AppArticlesSection(screenSize: screenSize),
                     AppFAQsSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 2,
+                      height: 20,
                     ),
                     AppMemberSection(screenSize: screenSize),
                     const SizedBox(
@@ -119,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     AppFooterSection(screenSize: screenSize),
                     const SizedBox(
-                      height: kDefaultPadding * 3,
+                      height: 60,
                     ),
                   ],
                 ),

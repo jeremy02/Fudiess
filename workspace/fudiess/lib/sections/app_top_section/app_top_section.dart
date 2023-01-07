@@ -20,6 +20,8 @@ class AppTopSection extends StatelessWidget {
     double calculatedWidth = screenSize.width;
     double calculatedHeight = screenSize.height;
 
+    double minTopSectionHeight = Responsive.isMobile(context) ? 700 : 700;
+
     // if isDesktop
     if (Responsive.isDesktop(context)) {
       calculatedWidth = calculatedWidth * 0.45;
@@ -35,13 +37,16 @@ class AppTopSection extends StatelessWidget {
       calculatedWidth = calculatedWidth * 1.5;
     }
 
+    calculatedHeight = calculatedHeight <= minTopSectionHeight ? minTopSectionHeight : calculatedHeight;
+
     return SafeArea(
       child: Stack(
         children: [
           AnimatedContainer(
             constraints: BoxConstraints(
-              minHeight: Responsive.isMobile(context) ? 450 : 600,
+              minHeight: minTopSectionHeight,
               maxWidth: kMaxWidth,
+              maxHeight: calculatedHeight
             ),
             height: calculatedHeight,
             margin: const EdgeInsets.only(

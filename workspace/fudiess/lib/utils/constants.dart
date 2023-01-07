@@ -11,6 +11,7 @@ const kDarkBlackColor = Color(0xFF191919);
 const kBgColor = Color(0xFFE7E7E7);
 const kBackgroundColor = Color.fromARGB(255, 245, 245, 253);
 const kBodyTextColor = Color(0xFF666666);
+const kExpansionBgColor = Color.fromRGBO(244, 244, 244, 1.0);
 
 const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF555555);

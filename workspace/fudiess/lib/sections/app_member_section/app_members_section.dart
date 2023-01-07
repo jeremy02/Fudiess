@@ -21,14 +21,14 @@ class AppMemberSection extends StatelessWidget {
           maxWidth: kMaxWidth,
         ),
         padding: EdgeInsets.only(
-          left: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 2,
-          right: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 2,
+          left: Responsive.isMobile(context) ? 10 : 40,
+          right: Responsive.isMobile(context) ? 10 : 40,
         ),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              kDefaultPadding * 0.75,
-            ),
-            color: Colors.white,
+          borderRadius: BorderRadius.circular(
+            15,
+          ),
+          color: Colors.white,
         ),
         duration: const Duration(
           milliseconds: 500,
@@ -38,57 +38,40 @@ class AppMemberSection extends StatelessWidget {
         child: Stack(
           children: [
             const MembersSectionCardLayout(),
-            Responsive.isMobile(context) ? Container() : const Positioned(
-              top: kDefaultPadding,
-              left: kDefaultPadding,
-              child: Image(
-                width: kDefaultPadding * 1.5,
-                height: kDefaultPadding * 1.5,
-                fit: BoxFit.contain,
-                image: AssetImage(
-                  'assets/images/member_section/ic_top_left.png',
-                ),
-              ),
+            Responsive.isMobile(context) ? Container() : Positioned(
+              top: 20,
+              left: 20,
+              child: _buildMemberStackImageWidget(context, null, null, 'assets/images/member_section/ic_top_left.png'),
             ),
-            Responsive.isMobile(context) ? Container() : const Positioned(
-              left: kDefaultPadding * 0.5,
-              bottom: kDefaultPadding * 0.5,
-              child: Image(
-                width: kDefaultPadding * 1.5,
-                height: kDefaultPadding * 1.5,
-                fit: BoxFit.contain,
-                image: AssetImage(
-                  'assets/images/member_section/ic_bottom_left.png',
-                ),
-              ),
+            Responsive.isMobile(context) ? Container() : Positioned(
+              left: 10,
+              bottom: 10,
+              child: _buildMemberStackImageWidget(context, null, null, 'assets/images/member_section/ic_bottom_left.png'),
             ),
-            Responsive.isMobile(context) ? Container() : const Positioned(
-              bottom: kDefaultPadding / 5,
+            Responsive.isMobile(context) ? Container() : Positioned(
+              bottom: 4,
               right: 0,
               left: 0,
-              child: Image(
-                width: kDefaultPadding,
-                height: kDefaultPadding,
-                fit: BoxFit.contain,
-                image: AssetImage(
-                  'assets/images/member_section/ic_bottom_center.png',
-                ),
-              ),
+              child: _buildMemberStackImageWidget(context, 20, 20, 'assets/images/member_section/ic_bottom_center.png'),
             ),
-            Responsive.isMobile(context) ? Container() : const Positioned(
-              top: kDefaultPadding * 0.5,
-              right: kDefaultPadding * 0.5,
-              child: Image(
-                width: kDefaultPadding * 1.5,
-                height: kDefaultPadding * 1.5,
-                fit: BoxFit.contain,
-                image: AssetImage(
-                  'assets/images/member_section/ic_top_right.png',
-                ),
-              ),
+            Responsive.isMobile(context) ? Container() : Positioned(
+              top: 10,
+              right: 10,
+              child: _buildMemberStackImageWidget(context, null, null, 'assets/images/member_section/ic_top_right.png'),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildMemberStackImageWidget(BuildContext context, double? width, double? height, String imagePath) {
+    return Image(
+      width: width ?? 30,
+      height: height ?? 30,
+      fit: BoxFit.contain,
+      image: AssetImage(
+        imagePath,
       ),
     );
   }

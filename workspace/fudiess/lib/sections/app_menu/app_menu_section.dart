@@ -139,6 +139,7 @@ class _AppMenuSectionState extends State<AppMenuSection> {
               coloredText: "That Make\nYou Fall In Love",
               coloredTextColor: Colors.black,
               textScaleFactor: 1.5,
+              isResponsiveText: true,
             ),
             const Spacer(),
             Responsive.isMobile(context) ? Container()
@@ -185,9 +186,9 @@ class _AppMenuSectionState extends State<AppMenuSection> {
           height: Responsive.isMobile(context) ? kDefaultPadding * 0.5 : kDefaultPadding * 0.8,
         ),
         if(Responsive.isTablet(context) || Responsive.isDesktop(context))
-          const RichTextTitle(
+          RichTextTitle(
             text: "Our menu which is popular lately.",
-            fontSize: 12,
+            fontSize: Responsive.isMobile(context) ? 12 : 14,
             fontWeight: FontWeight.bold,
             textColor: kTextSecondaryColor,
             alignStart: true,

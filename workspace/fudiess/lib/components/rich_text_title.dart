@@ -11,6 +11,7 @@ class RichTextTitle extends StatelessWidget {
   final double? coloredTextFontSize;
   final FontWeight? coloredTextFontWeight;
   final double? textScaleFactor;
+  final bool? isResponsiveText;
 
   const RichTextTitle({
     Key? key,
@@ -24,10 +25,21 @@ class RichTextTitle extends StatelessWidget {
     this.coloredTextFontSize,
     this.coloredTextFontWeight,
     this.textScaleFactor,
+    this.isResponsiveText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return isResponsiveText == true ?
+      FittedBox(
+          fit: BoxFit.fitWidth,
+          child: _buildRichTextTitle(context)
+      )
+        :
+    _buildRichTextTitle(context);
+  }
+
+  Widget _buildRichTextTitle(BuildContext context) {
     return RichText(
       textAlign: alignStart==true ? TextAlign.start : TextAlign.center,
       // textScaleFactor: textScaleFactor ?? 0.0,

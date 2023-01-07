@@ -70,6 +70,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/images/faqs/
+    - assets/images/articles/
     - assets/images/member_section/
     - assets/images/menu_section/
     - assets/images/testimonials/
