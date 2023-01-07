@@ -5,6 +5,7 @@ App concept created and inspired by [Fudiess - Food delivery Mobile & Tablet Res
 
 ## App Responsive
 A nice clean Food Delivery App for Designer or developers.
+Fudiess is a website that helps customers order food without having to leave the house, fudiess will deliver food after you order it from home.
 We redesign the app also make it responsive so that you can run it everywhere on your phone, tab, or web. In this responsive project, we will show you the real power of flutter. Make mobile, web, and desktop app from a single codebase.
 
 ## About
@@ -31,7 +32,7 @@ Web and iPad Preview           |      Mobile UI Preview
 
 Mobile Mockup Preview           |      Ipad Mockup Preview           |      Web Mockup Preview
 :-------------------------:|:-------------------------:|:-------------------------:
-![](screenshots/mobile_mockup.png)  |  ![](screenshots/ipad_mockup.png)  |  ![](screenshots/web_mockup.png)
+![](screenshots/mobile_mockup.png | height=200)  |  ![](screenshots/ipad_mockup.png)  |  ![](screenshots/web_mockup.png)
 
 ## Design Details
 As exposed on the shared dribble link, there's all the design details also present in this app as designed.
