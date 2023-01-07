@@ -28,9 +28,6 @@ Web and iPad Preview           |      Mobile UI Preview
 :-------------------------:|:-------------------------:
 ![](screenshots/ipad_version.png)  |  ![](screenshots/mobile_version.png)
 
-## Design Details
-As exposed on the shared dribble link, there's all the design details also present in this app as designed.
-
 #### The App UI Mockups
 
 Mobile Mockup Preview           |      Ipad Mockup Preview           |      Web Mockup Preview
@@ -47,37 +44,8 @@ Mobile Mockup Preview           |
 
 </div>
 
-Ipad Mockup Preview           |
-:-------------------------:
-
-<div style="width: 60%; height: 60%">
-
-![](screenshots/ipad_mockup.png)
-
-</div>
-
-Web Mockup Preview           |
-:-------------------------:
-
-<div style="width: 60%; height: 60%">
-
-![](screenshots/web_mockup.png)
-
-</div>
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><img src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" style="width: 33%; height: 60%" alt=""/><br /><sub><b>Mobile Mockup Preview</b></sub><br /><a href="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" title="Mobile Mockup Preview ">🐛</a></td>
-    <td align="center"><img src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" style="width: 33%; height: 60%" alt=""/><br /><sub><b>Mobile Mockup Preview</b></sub><br /><a href="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" title="Mobile Mockup Preview ">🐛</a></td>
-    <td align="center"><img src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" style="width: 33%; height: 60%" alt=""/><br /><sub><b>Mobile Mockup Preview</b></sub><br /><a href="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" title="Mobile Mockup Preview ">🐛</a></td>
-  </tr>
-</table>
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-## Notes
-Done
+## Design Details
+As exposed on the shared dribble link, there's all the design details also present in this app as designed.
 
 ## Contribution
 
