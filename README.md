@@ -32,7 +32,7 @@ Web and iPad Preview           |      Mobile UI Preview
 
 Mobile Mockup Preview           |      Ipad Mockup Preview           |      Web Mockup Preview
 :-------------------------:|:-------------------------:|:-------------------------:
-![](screenshots/mobile_mockup.png | height=200)  |  ![](screenshots/ipad_mockup.png)  |  ![](screenshots/web_mockup.png)
+<img src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" data-canonical-src="https://github.com/jeremy02/Fudiess/blob/master/screenshots/mobile_mockup.png" height="400" />  |  ![](screenshots/ipad_mockup.png)  |  ![](screenshots/web_mockup.png)
 
 ## Design Details
 As exposed on the shared dribble link, there's all the design details also present in this app as designed.
