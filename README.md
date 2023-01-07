@@ -28,6 +28,15 @@ Web and iPad Preview           |      Mobile UI Preview
 :-------------------------:|:-------------------------:
 ![](screenshots/ipad_version.png)  |  ![](screenshots/mobile_version.png)
 
+## Design Details
+As exposed on the shared dribble link, there's all the design details also present in this app as designed.
+
+#### The App UI Mockups
+
+Mobile Mockup Preview           |      Ipad Mockup Preview           |      Web Mockup Preview
+:-------------------------:|:-------------------------:|:-------------------------:
+![](screenshots/mobile_mockup.png)  |  ![](screenshots/ipad_mockup.png)  |  ![](screenshots/web_mockup.png)
+
 #### Full Mockup UI Previews
 Mobile Mockup Preview           |
 :-------------------------:
@@ -37,8 +46,25 @@ Mobile Mockup Preview           |
 ![](screenshots/mobile_mockup.png)
 
 </div>
-## Design Details
-As exposed on the shared dribble link, there's all the design details also present in this app as designed.
+
+Ipad Mockup Preview           |
+:-------------------------:
+
+<div style="width: 60%; height: 60%">
+
+![](screenshots/ipad_mockup.png)
+
+</div>
+
+Web Mockup Preview           |
+:-------------------------:
+
+<div style="width: 60%; height: 60%">
+
+![](screenshots/web_mockup.png)
+
+</div>
+
 
 ## Notes
 Done
