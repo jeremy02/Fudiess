@@ -32,15 +32,8 @@ Web and iPad Preview           |      Mobile UI Preview
 
 Mobile Mockup Preview           |      Ipad Mockup Preview           |      Web Mockup Preview
 :-------------------------:|:-------------------------:|:-------------------------:
-![](screenshots/mobile_mockup.png)  |  ![](screenshots/ipad_mockup.png)  |  ![](screenshots/web_mockup.png)
+<div style="width: 33%;height: 60%"> ![](screenshots/mobile_mockup.png)</div>  |  <div style="width: 33%;height: 60%"> ![](screenshots/ipad_mockup.png)</div>  |  <div style="width: 33%;height: 60%"> ![](screenshots/web_mockup.png)</div>
 
-
-
-<div style="width: 60%; height: 60%">
-
-![](screenshots/mobile_mockup.png)
-
-</div>
 ## Design Details
 As exposed on the shared dribble link, there's all the design details also present in this app as designed.
 
