@@ -7,14 +7,33 @@ import '../../../utils/responsive.dart';
 import '../controllers/testimonial_items_controller.dart';
 import '../models/testimonial_item.dart';
 
-class AppTestimonialsSectionContentLayout extends StatelessWidget {
+class AppTestimonialsSectionContentLayout extends StatefulWidget {
+
   const AppTestimonialsSectionContentLayout({
-    required Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
+  _AppTestimonialsSectionContentLayoutState createState() => _AppTestimonialsSectionContentLayoutState();
+}
+
+class _AppTestimonialsSectionContentLayoutState extends State<AppTestimonialsSectionContentLayout> {
+
+  final TestimonialItemsController _testimonialItemsController = Get.put(TestimonialItemsController());
+
+  @override
+  void dispose() {
+    _testimonialItemsController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TestimonialItemsController _testimonialItemsController = Get.put(TestimonialItemsController());
 
     return Flexible(
       flex: Responsive.isMobile(context) ? 0: 3,

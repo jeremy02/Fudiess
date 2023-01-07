@@ -47,7 +47,7 @@ class DefaultButton extends StatelessWidget {
         ),
         side: MaterialStateProperty.all<BorderSide>(
           BorderSide(
-            width: isOutlined == true ? 1 : 0,
+            width: isOutlined == true ? 0.5 : 0,
             color: kPrimaryColor,
           ),
         ),
