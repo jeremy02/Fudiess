@@ -1,4 +1,4 @@
-# Fudiess - Food delivery Mobile & Tablet Responsive App
+# Fudiess - Food delivery Mobile,Tablet and Web Responsive App
 
 ## App Concept
 App concept created and inspired by [Fudiess - Food delivery Mobile & Tablet Responsive.](https://dribbble.com/shots/16539854-Fudiess-Food-delivery-Mobile-Tablet-Responsive) design found on dribble.
