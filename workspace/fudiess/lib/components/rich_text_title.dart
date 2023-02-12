@@ -31,12 +31,19 @@ class RichTextTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isResponsiveText == true ?
-      FittedBox(
-          fit: BoxFit.fitWidth,
-          child: _buildRichTextTitle(context)
-      )
+          FittedBox(
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.bottomCenter,
+            child: ConstrainedBox(
+                constraints: BoxConstraints(
+                    minWidth: 1,
+                    minHeight: 1
+                ), // here
+                child: _buildRichTextTitle(context)
+            ),
+          )
         :
-    _buildRichTextTitle(context);
+          _buildRichTextTitle(context);
   }
 
   Widget _buildRichTextTitle(BuildContext context) {
@@ -44,7 +51,7 @@ class RichTextTitle extends StatelessWidget {
       textAlign: alignStart==true ? TextAlign.start : TextAlign.center,
       // textScaleFactor: textScaleFactor ?? 0.0,
       text: TextSpan(
-        text: text,
+        text: "$text ",
         style: TextStyle(
             fontSize: fontSize,
             color: textColor,

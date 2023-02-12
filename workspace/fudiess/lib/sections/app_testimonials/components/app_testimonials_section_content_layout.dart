@@ -23,7 +23,7 @@ class _AppTestimonialsSectionContentLayoutState extends State<AppTestimonialsSec
 
   @override
   void dispose() {
-    _testimonialItemsController.dispose();
+    // _testimonialItemsController.dispose();
     super.dispose();
   }
 
