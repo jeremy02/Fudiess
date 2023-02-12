@@ -1,3 +1,73 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+
+.svn/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+*.dart_tool/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+*./build/
+/.packages
+./build/*
+./.packages
+./.packages/*
+
+# All in .dart_tool
+!.dart_tool/
+.dart_tool/*
+
+# All in build
+!/build/
+/build/*
+# All in build
+!windows/
+windows/*
+./windows/*
+./windows/*
+./windows/
+.windows/*
+.windows/
+/windows/*
+/windows/
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Exceptions to above rules.
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+=======
 # Built application files
 *.apk
 *.aar
@@ -44,11 +114,21 @@ captures/
 .idea/assetWizardSettings.xml
 .idea/dictionaries
 .idea/libraries
+.idea/*
 # Android Studio 3 in .gitignore file.
 .idea/caches
 .idea/modules.xml
 # Comment next line if keeping position of elements in Navigation Editor is relevant for you
 .idea/navEditor.xml
+
+./workspace/*
+./workspace/
+.workspace/*
+.workspace/
+/workspace/*
+/workspace/
+
+pubspec.lock
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
@@ -58,6 +138,15 @@ captures/
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 .cxx/
+
+#Ignore Android Folders
+./android/.gradle*
+./android/.gradle/*
+./android/.gradle
+./android/gradlew
+./android/gradlew.bat
+
+#
 
 # Google Services (e.g. APIs or Firebase)
 # google-services.json
@@ -84,15 +173,11 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-# Ignore vs-code server files
-.vscode-server
+.metadata
+./metadata
 
-# Git config files
-.gitconfig
+./.dart_tool/*
+.dart_tool/*
+.dart_tool
 
-# ssh files
-.ssh
-.ssh/*
-
-.bash_history
-.bash_history/*
+.pubspec.lock
